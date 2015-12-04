@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20151204005409) do
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "password_hash"
+    t.string   "password_digest"
     t.string   "email"
     t.boolean  "looking_for_work", default: false
     t.boolean  "admin",            default: false

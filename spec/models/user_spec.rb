@@ -5,7 +5,7 @@
 #  id               :integer          not null, primary key
 #  first_name       :string
 #  last_name        :string
-#  password_hash    :string
+#  password_digest  :string
 #  email            :string
 #  looking_for_work :boolean          default(FALSE)
 #  admin            :boolean          default(FALSE)

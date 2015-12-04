@@ -5,7 +5,7 @@
 #  id               :integer          not null, primary key
 #  first_name       :string
 #  last_name        :string
-#  password_hash    :string
+#  password_digest  :string
 #  email            :string
 #  looking_for_work :boolean          default(FALSE)
 #  admin            :boolean          default(FALSE)
@@ -21,4 +21,9 @@
 
 class User < ActiveRecord::Base
   has_secure_password
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true, uniqueness: true
+  validates_format_of :email, with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
+
 end
