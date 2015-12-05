@@ -10,16 +10,16 @@ class SessionsController < ApplicationController
       if @user.admin?
         redirect_to admin_index_path
       else
-        redirect_to user_path
+        redirect_to user_path(@user)
       end
     else
-      redirect_to root_path
+      redirect_to new_session_path
     end
   end
 
   def destroy
-    session.delete(:current_user)
-    redirect_to root_path
+    session.delete(:user_id)
+    redirect_to root_path, alert: "You have been logged out."
   end
 
   private

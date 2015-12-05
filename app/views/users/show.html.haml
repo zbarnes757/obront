@@ -1,0 +1,36 @@
+.row.headline
+  .col-md-6.col-md-offset-3
+    - if current_user.admin? && @user != current_user
+      %h2
+        = @user.full_name
+    - else
+      %h2 Hello, #{@user.first_name}
+      %h3 Here are your current settings.
+
+
+.row.user-info
+  .col-md-6.col-md-offset-3
+    .names.row
+      .col-md-6
+        %p
+          %strong First Name
+        %p
+          = @user.first_name
+      .col-md-6
+        %p
+          %strong Last Name
+        %p
+          = @user.last_name
+    .email
+      %p
+        %strong Email
+      %p
+        = @user.email
+    - unless @user.admin?
+      .work-status
+        %p Are you looking for work?
+        .looking-for-work
+          - if @user.looking_for_work?
+            %p YES, I WANT MORE WORK
+          - else
+            %p NO, LEAVE ME ALONE

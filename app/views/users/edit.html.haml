@@ -1,0 +1,37 @@
+.row.headline
+  .col-md-6.col-md-offset-3
+    %h1 Edit Settings
+
+.row.main-form
+  .col-md-6.col-md-offset-3
+    = form_for @user do |f|
+
+      .form-group
+        = f.label :first_name
+        = f.text_field :first_name, class: 'form-control'
+      .form-group
+        = f.label :last_name
+        = f.text_field :last_name, class: 'form-control'
+      .form-group
+        = f.label :email
+        = f.email_field :email, class: 'form-control'
+      - unless @user.admin?
+        .form-group
+          = f.label :looking_for_work, "Looking for work?"
+          %br
+          = f.select :looking_for_work, [['YES, I WANT MORE WORK', true], ['NO, LEAVE ME ALONE', false ]], class: 'form-control'
+      - if current_user.admin?
+        .form-group
+          = f.label :admin, "Is this user an Admin?"
+          %br
+          = f.select :admin, [['No', false], ['Yes', true]], class: 'form-control'
+      .form-group
+        = f.label :password
+        = f.password_field :password, class: 'form-control'
+
+
+      = f.submit "Update", class: "btn btn-primary"
+      - if current_user.admin?
+        = link_to "Cancel", admin_index_path, class: "btn btn-default"
+      - else
+        = link_to "Cancel", user_path(current_user), class: "btn btn-default"

@@ -10,9 +10,18 @@ unless User.any?
   User.create({
     first_name:            "Zac",
     last_name:             "Barnes",
-    email:                 "test_email@email.com",
+    email:                 "zac.barnes89@gmail.com",
     admin:                 true,
     password:              "123456",
     password_confirmation: "123456"
+    })
+
+  User.create({
+    first_name:            "Joe",
+    last_name:             "Editor",
+    email:                 "joe.editor@gmail.com",
+    admin:                 false,
+    password:              "654321",
+    password_confirmation: "654321"
     })
 end

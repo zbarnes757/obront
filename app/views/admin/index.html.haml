@@ -1,0 +1,28 @@
+.row.headline
+  .col-md-6.col-md-offset-3
+    %h2 All Editors
+
+.row
+  .col-md-8.col-md-offset-2
+    %table.table
+      %tr
+        %th Name
+        %th Email
+        %th Looking for Work?
+        %th
+        %th
+      - User.editors.each do |user|
+        %tr{ class: "#{ looking_for_work_class(user) }"}
+          %td
+            = user.full_name
+          %td
+            = user.email
+          %td
+            - if user.looking_for_work?
+              YES, I WANT MORE WORK
+            - else
+              NO, LEAVE ME ALONE
+          %td
+            = link_to "Edit", edit_user_path(user), class: "btn btn-default"
+          %td
+            = link_to "Delete Editor", user_path(user), method: :delete,  data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
