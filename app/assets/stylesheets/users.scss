@@ -1,3 +1,26 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.work-status {
+  width: 75%;
+  text-align: center;
+  margin: 15px auto;
+}
+
+.looking-for-work {
+  padding: 25px 10px;
+  border-radius: 5px;
+  &.success {
+    background-color: #DFF0D8;
+    border: 1px solid #3C763D;
+  }
+  &.danger {
+    background-color: #F2DEDE;
+    border: 1px solid #A94442;
+  }
+}
+
+.user-info {
+  margin: 25px auto;
+  text-align: center;
+}

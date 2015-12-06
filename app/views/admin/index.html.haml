@@ -1,16 +1,25 @@
-.row.headline
+.row.headline.admin
   .col-md-6.col-md-offset-3
-    %h2 All Editors
+    - if params[:looking_for_work] == "true"
+      %h2 Editors Looking for Work
+    - elsif params[:looking_for_work] == "false"
+      %h2 Editors Not Looking for Work
+    - else
+      %h2 All Editors
+
+.row
+  .col-md-6.col-md-offset-3
     .search-buttons
       = link_to "All Editors", admin_index_path, class: "btn btn-default search-button"
-      = link_to "Only Looking for Work", "/admin?looking_for_work=true", class: "btn btn-default search-button"
-      = link_to "Not Looking for Work", "/admin?looking_for_work=false", class: "btn btn-default search-button"
+      = link_to "Only Looking for Work", "/admin?looking_for_work=true", class: "btn btn-success search-button"
+      = link_to "Not Looking for Work", "/admin?looking_for_work=false", class: "btn btn-danger search-button"
 
 
 .row
   .col-md-8.col-md-offset-2
     - if @editors.empty?
-      %p No results found.
+      .no-results
+        %h5 No results found.
     - else
       %table.table
         %tr

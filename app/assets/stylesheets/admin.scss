@@ -1,3 +1,16 @@
 // Place all the styles related to the admin_users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.no-results {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.search-buttons {
+  text-align: center;
+  margin: 15px auto 20px;
+}
+
+.search-button {
+  margin: 0 5px;
+}
