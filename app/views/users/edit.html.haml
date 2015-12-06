@@ -1,3 +1,4 @@
+-# TODO: Add change password
 .row.headline
   .col-md-6.col-md-offset-3
     %h1 Edit Settings
@@ -26,8 +27,11 @@
           %br
           = f.select :admin, [['No', false], ['Yes', true]], class: 'form-control'
       .form-group
-        = f.label :password
-        = f.password_field :password, class: 'form-control'
+        = f.label :password, "Change Password"
+        = f.password_field :password, class: 'form-control', placeholder: "Optional"
+      .form-group
+        = f.label :password_confirmation, "Confirm Change Password"
+        = f.password_field :password_confirmation, class: 'form-control', placeholder: "Optional"
 
 
       = f.submit "Update", class: "btn btn-primary"

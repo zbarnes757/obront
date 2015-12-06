@@ -1,6 +1,6 @@
 .row.headline
   .col-md-6.col-md-offset-3
-    %h1 Create a New Editor
+    %h1 Create a New User
 
 .row.main-form
   .col-md-6.col-md-offset-3
@@ -15,17 +15,21 @@
       .form-group
         = f.label :email
         = f.email_field :email, class: 'form-control'
-      .form-group
+      .form-group.admin-form
+        = f.label :admin, "Is this user an Admin?"
+        %span.help-block Only BIAB employees should be marked as admin.
+        = f.select :admin, [['No', false], ['Yes', true]], class: 'form-control'
+      .form-group.looking-for-work-form
         = f.label :looking_for_work, "Looking for work?"
         %br
         = f.select :looking_for_work, [['YES, I WANT MORE WORK', true], ['NO, LEAVE ME ALONE', false ]], class: 'form-control'
       .form-group
-        = f.label :admin, "Is this user an Admin?"
-        %br
-        = f.select :admin, [['No', false], ['Yes', true]], class: 'form-control'
-      .form-group
-        = f.label :password
+        = f.label :password, "Choose User's Password"
         = f.password_field :password, class: 'form-control'
+        %span.help-block The user will be able to change this once they log in.
+      .form-group
+        = f.label :password_confirmation, "Confirm Password"
+        = f.password_field :password_confirmation, class: 'form-control'
 
 
       = f.submit "Create", class: "btn btn-primary"

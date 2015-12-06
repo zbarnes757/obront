@@ -1,28 +1,36 @@
 .row.headline
   .col-md-6.col-md-offset-3
     %h2 All Editors
+    .search-buttons
+      = link_to "All Editors", admin_index_path, class: "btn btn-default search-button"
+      = link_to "Only Looking for Work", "/admin?looking_for_work=true", class: "btn btn-default search-button"
+      = link_to "Not Looking for Work", "/admin?looking_for_work=false", class: "btn btn-default search-button"
+
 
 .row
   .col-md-8.col-md-offset-2
-    %table.table
-      %tr
-        %th Name
-        %th Email
-        %th Looking for Work?
-        %th
-        %th
-      - User.editors.each do |user|
-        %tr{ class: "#{ looking_for_work_class(user) }"}
-          %td
-            = user.full_name
-          %td
-            = user.email
-          %td
-            - if user.looking_for_work?
-              YES, I WANT MORE WORK
-            - else
-              NO, LEAVE ME ALONE
-          %td
-            = link_to "Edit", edit_user_path(user), class: "btn btn-default"
-          %td
-            = link_to "Delete Editor", user_path(user), method: :delete,  data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+    - if @editors.empty?
+      %p No results found.
+    - else
+      %table.table
+        %tr
+          %th Name
+          %th Email
+          %th Looking for Work?
+          %th
+          %th
+        - @editors.each do |editor|
+          %tr{ class: "#{ looking_for_work_class(editor) }"}
+            %td
+              = editor.full_name
+            %td
+              = editor.email
+            %td
+              - if editor.looking_for_work?
+                YES, I WANT MORE WORK
+              - else
+                NO, LEAVE ME ALONE
+            %td
+              = link_to "Edit", edit_user_path(editor), class: "btn btn-default"
+            %td
+              = link_to "Delete Editor", user_path(editor), method: :delete,  data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
