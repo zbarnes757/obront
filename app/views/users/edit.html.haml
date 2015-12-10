@@ -21,6 +21,11 @@
           = f.label :looking_for_work, "Looking for work?"
           %br
           = f.select :looking_for_work, [['YES, I WANT MORE WORK', true], ['NO, LEAVE ME ALONE', false ]], class: 'form-control'
+      - if current_user.admin? && !@user.admin?
+        .form-group
+          = f.label :classification, "Editor Classification"
+          %br
+          = f.select :classification, [["Not Yet Assigned", :not_yet_assigned], ["First Assingment", :first_assignment], ["B-list", :b_list], ["A-list", :a_list]], class: 'form-control'
       - if current_user.admin?
         .form-group
           = f.label :admin, "Is this user an Admin?"

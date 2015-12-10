@@ -11,6 +11,7 @@
 #  admin            :boolean          default(FALSE)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  classification   :integer          default(0)
 #
 # Indexes
 #
@@ -26,10 +27,25 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true
   validates_format_of :email, with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
 
+  enum classification: [ :not_yet_assigned, :first_assignment, :b_list, :a_list ]
+
   scope :editors, -> { where(admin: false) }
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def pretty_classification
+    case classification
+    when "not_yet_assigned"
+      "Not Yet Assigned"
+    when "first_assignment"
+      "First Assignment"
+    when "b_list"
+      "B-list"
+    when "a_list"
+      "A-list"
+    end
   end
 
 end

@@ -18,7 +18,11 @@
       .form-group.admin-form
         = f.label :admin, "Is this user an Admin?"
         %span.help-block Only BIAB employees should be marked as admin.
-        = f.select :admin, [['No', false], ['Yes', true]], class: 'form-control'
+        = f.select :admin, [["No", false], ["Yes", true]], class: 'form-control'
+      .form-group.classification-form
+        = f.label :classification, "Editor Classification"
+        %br
+        = f.select :classification, [["Not Yet Assigned", :not_yet_assigned], ["First Assingment", :first_assignment], ["B-list", :b_list], ["A-list", :a_list]], class: 'form-control'
       .form-group.looking-for-work-form
         = f.label :looking_for_work, "Looking for work?"
         %br

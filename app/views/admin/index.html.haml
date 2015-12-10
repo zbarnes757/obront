@@ -10,13 +10,15 @@
 .row
   .col-md-6.col-md-offset-3
     .search-buttons
-      = link_to "All Editors", admin_index_path, class: "btn btn-default search-button"
-      = link_to "Only Looking for Work", "/admin?looking_for_work=true", class: "btn btn-success search-button"
-      = link_to "Not Looking for Work", "/admin?looking_for_work=false", class: "btn btn-danger search-button"
+      = form_tag admin_index_path, method: "get", class: "form-inline"
+      .form-group
+        = label_tag :query, "Search for:"
+        = select_tag :query, options_for_select(admin_search_options), class: "form-control"
+      = submit_tag "Search", class: "btn btn-default"
 
 
 .row
-  .col-md-8.col-md-offset-2
+  .col-md-10.col-md-offset-1
     - if @editors.empty?
       .no-results
         %h5 No results found.
@@ -26,6 +28,7 @@
           %th Name
           %th Email
           %th Looking for Work?
+          %th Editor Classification
           %th
           %th
         - @editors.each do |editor|
@@ -39,6 +42,8 @@
                 YES, I WANT MORE WORK
               - else
                 NO, LEAVE ME ALONE
+            %td
+              = editor.pretty_classification
             %td
               = link_to "Edit", edit_user_path(editor), class: "btn btn-default"
             %td

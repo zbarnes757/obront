@@ -11,6 +11,7 @@
 #  admin            :boolean          default(FALSE)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  classification   :integer          default(0)
 #
 # Indexes
 #
