@@ -39,4 +39,4 @@
             %p YES, I WANT MORE WORK
           - else
             %p NO, LEAVE ME ALONE
-          = link_to "Change Status", edit_user_path(@user), class: "btn btn-#{looking_for_work_class(@user)}"
+          = link_to "Change Status", change_status_path, class: "btn btn-#{looking_for_work_class(@user)}"

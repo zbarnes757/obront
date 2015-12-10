@@ -33,7 +33,7 @@ class UsersController < ApplicationController
       if current_user.admin?
         redirect_to admin_index_path, notice: "User has been successfully updated."
       else
-        redirect_to user_path, notice: "Your settings have been successfully updated."
+        redirect_to user_path(@user), notice: "Your settings have been successfully updated."
       end
     else
       flash[:errors] = @user.errors.full_messages
@@ -44,6 +44,11 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     redirect_to admin_index_path
+  end
+
+  def insta_change_status
+    current_user.update_attributes(looking_for_work: !current_user.looking_for_work)
+    redirect_to user_path(current_user)
   end
 
   private
