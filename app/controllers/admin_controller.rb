@@ -7,22 +7,23 @@ class AdminController < ApplicationController
 
   private
 
-  def sort_editors_by_params
-    case params[:query]
-    when "looking_for_work"
-      User.where(admin: false, looking_for_work: true)
-    when "not_looking_for_work"
-      User.where(admin: false, looking_for_work: false)
-    when "a_list"
-      User.a_list.where(admin: false)
-    when "b_list"
-      User.b_list.where(admin: false)
-    when "first_assignment"
-      User.first_assignment.where(admin: false)
-    when "not_yet_assigned"
-      User.not_yet_assigned.where(admin: false)
+  def booleaned_work_statuses
+    if params[:looking_for_work]
+      return params[:looking_for_work].map { |status| status == "true" ? true : false }
     else
-      User.editors
+      return [ true, false ]
+    end
+  end
+
+  def sort_editors_by_params
+    User.where(admin: false, looking_for_work: booleaned_work_statuses, classification: symbolized_classifications)
+  end
+
+  def symbolized_classifications
+    if params[:classification]
+      return params[:classification].map { |classification| User.classifications[classification] }
+    else
+      return [ 0, 1, 2, 3]
     end
   end
 end

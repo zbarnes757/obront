@@ -11,9 +11,36 @@
   .col-md-6.col-md-offset-3
     .search-buttons
       = form_tag admin_index_path, method: "get", class: "form-inline"
-      .form-group
-        = label_tag :query, "Search for:"
-        = select_tag :query, options_for_select(admin_search_options), class: "form-control"
+      .row.work-status-admin
+        %h4 Work Status
+        .checkbox
+          = label_tag "Looking for work"
+          %br
+          = check_box_tag "looking_for_work[]", true, false
+        .checkbox
+          = label_tag "Not Looking for work"
+          %br
+          = check_box_tag "looking_for_work[]", false, false
+      .row.classification-admin
+        %h4 Editor Classification
+        .checkbox
+          = label_tag "A-List"
+          %br
+          = check_box_tag "classification[]", "a_list", false
+        .checkbox
+          = label_tag "B-List"
+          %br
+          = check_box_tag "classification[]", "b_list", false
+        .checkbox
+          = label_tag "First Assignment"
+          %br
+          = check_box_tag "classification[]", "first_assignment", false
+        .checkbox
+          = label_tag "Not Yet Assigned"
+          %br
+          = check_box_tag "classification[]", "not_yet_assigned", false
+      %span.help-block
+        Or select nothing and everything. The world is yours.
       = submit_tag "Search", class: "btn btn-default"
 
 
