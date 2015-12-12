@@ -40,12 +40,22 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true
   validates_format_of :email, with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
 
+  attr_accessor :category
+
+  has_many :interests
+  has_many :categories, through: :interests
+
   enum classification: [ :not_yet_assigned, :first_assignment, :b_list, :a_list ]
 
   scope :editors, -> { where(admin: false) }
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def has_interest?(category_id)
+    ids = interests.pluck(:category_id)
+    ids.include?(category_id.to_i)
   end
 
   def pretty_classification

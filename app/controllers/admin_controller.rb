@@ -15,8 +15,20 @@ class AdminController < ApplicationController
     end
   end
 
+  def filtered_categories
+    if params[:category]
+      params[:category]
+    else
+      Category.pluck(:id)
+    end
+  end
+
   def sort_editors_by_params
-    User.where(admin: false, looking_for_work: booleaned_work_statuses, classification: symbolized_classifications)
+    if params[:category]
+      User.joins(:interests).where(admin: false, looking_for_work: booleaned_work_statuses, classification: symbolized_classifications, interests: { category_id: filtered_categories })
+    else
+      User.where(admin: false, looking_for_work: booleaned_work_statuses, classification: symbolized_classifications)
+    end
   end
 
   def symbolized_classifications

@@ -11,10 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151212154825) do
+ActiveRecord::Schema.define(version: 20151212170310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.string   "pretty_name"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "categories", ["name"], name: "index_categories_on_name", using: :btree
+  add_index "categories", ["pretty_name"], name: "index_categories_on_pretty_name", using: :btree
+
+  create_table "interests", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "interests", ["category_id"], name: "index_interests_on_category_id", using: :btree
+  add_index "interests", ["user_id"], name: "index_interests_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
@@ -45,4 +65,6 @@ ActiveRecord::Schema.define(version: 20151212154825) do
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["looking_for_work"], name: "index_users_on_looking_for_work", using: :btree
 
+  add_foreign_key "interests", "categories"
+  add_foreign_key "interests", "users"
 end

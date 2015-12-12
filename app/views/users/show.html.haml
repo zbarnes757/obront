@@ -27,7 +27,12 @@
             %strong Email
           %p
             = @user.email
-
+    .row
+      .col-md-8.col-md-offset-2
+        %p
+          %strong Your Current Interests
+        %p
+          = @user.categories.pluck(:pretty_name).join(', ')
 .row
   .col-md-6.col-md-offset-3
     - unless @user.admin?

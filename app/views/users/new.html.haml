@@ -31,6 +31,11 @@
         .form-group
           = f.label :phone, "Phone Number"
           = f.telephone_field :phone, class: 'form-control'
+        %h3 Interests
+        - Category.all.each do |category|
+          .checkbox
+            = check_box_tag "category[]", category.id, false, class: "interests-new"
+            = label_tag :category, category.pretty_name
         %h3 Address Info
         .form-group
           = f.label :street, "Street"

@@ -2,11 +2,12 @@ class UsersController < ApplicationController
   before_action :require_login, only: [:edit, :update, :show]
   before_action :require_admin_login, only: [:new, :create, :destroy]
   before_action :get_user, only: [:edit, :show, :update, :destroy]
-  before_action :check_user_perissions_for_page, only: [:edit, :update, :show]
+  before_action :check_user_permissions_for_page, only: [:edit, :update, :show]
 
   def create
     @user = User.new(user_params)
     if @user.save
+      add_interests
       redirect_to admin_index_path, notice: "User has been successfully created."
     else
       flash[:errors] = @user.errors.full_messages
@@ -19,17 +20,14 @@ class UsersController < ApplicationController
   end
 
   def edit
-    check_user_perissions_for_page
   end
 
   def show
-    check_user_perissions_for_page
   end
 
-  # TODO: Add ability to change passwords
   def update
-    check_user_perissions_for_page
     if @user.update_attributes(user_params)
+      update_interests
       if current_user.admin?
         redirect_to admin_index_path, notice: "User has been successfully updated."
       else
@@ -53,7 +51,15 @@ class UsersController < ApplicationController
 
   private
 
-  def check_user_perissions_for_page
+  def add_interests
+    if params[:category]
+      params[:category].each do |category_id|
+        @user.interests.create(category_id: category_id.to_i)
+      end
+    end
+  end
+
+  def check_user_permissions_for_page
     unless current_user_is_user_or_admin?
       redirect_to user_path(current_user),  alert: "You do not have permission to view that page."
       return
@@ -66,6 +72,15 @@ class UsersController < ApplicationController
 
   def get_user
     @user = User.find(params[:id])
+  end
+
+  def update_interests
+    if params[:category]
+      @user.interests.delete_all
+      params[:category].each do |category_id|
+        @user.interests.create(category_id: category_id.to_i)
+      end
+    end
   end
 
   def user_params

@@ -32,6 +32,11 @@
           %br
           = f.select :admin, [['No', false], ['Yes', true]], class: 'form-control'
       - unless @user.admin?
+        %h3 Interests
+        - Category.all.each do |category|
+          .checkbox
+            = check_box_tag "category[]", category.id, @user.has_interest?(category.id), class: "interests-new"
+            = label_tag :category, category.pretty_name
         .form-group
           = f.label :phone, "Phone Number"
           = f.telephone_field :phone, class: 'form-control'
