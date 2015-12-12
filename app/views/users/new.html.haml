@@ -7,10 +7,10 @@
     = form_for @user do |f|
 
       .form-group
-        = f.label :first_name
+        = f.label :first_name, "First Name"
         = f.text_field :first_name, class: 'form-control'
       .form-group
-        = f.label :last_name
+        = f.label :last_name, "Last Name"
         = f.text_field :last_name, class: 'form-control'
       .form-group
         = f.label :email
@@ -18,23 +18,67 @@
       .form-group.admin-form
         = f.label :admin, "Is this user an Admin?"
         %span.help-block Only BIAB employees should be marked as admin.
-        = f.select :admin, [["No", false], ["Yes", true]], class: 'form-control'
-      .form-group.classification-form
-        = f.label :classification, "Editor Classification"
-        %br
-        = f.select :classification, [["Not Yet Assigned", :not_yet_assigned], ["First Assingment", :first_assignment], ["B-list", :b_list], ["A-list", :a_list]], class: 'form-control'
-      .form-group.looking-for-work-form
-        = f.label :looking_for_work, "Looking for work?"
-        %br
-        = f.select :looking_for_work, [['YES, I WANT MORE WORK', true], ['NO, LEAVE ME ALONE', false ]], class: 'form-control'
+        = f.select :admin, [["No", false], ["Yes", true]], {}, { class: 'form-control' }
+      .admin-hide
+        .form-group
+          = f.label :classification, "Editor Classification"
+          %br
+          = f.select :classification, [["Not Yet Assigned", :not_yet_assigned], ["First Assingment", :first_assignment], ["B-list", :b_list], ["A-list", :a_list]], {}, { class: 'form-control' }
+        .form-group
+          = f.label :looking_for_work, "Looking for work?"
+          %br
+          = f.select :looking_for_work, [['YES, I WANT MORE WORK', true], ['NO, LEAVE ME ALONE', false ]], {}, { class: 'form-control' }
+        .form-group
+          = f.label :phone, "Phone Number"
+          = f.telephone_field :phone, class: 'form-control'
+        %h3 Address Info
+        .form-group
+          = f.label :street, "Street"
+          = f.text_field :street, class: 'form-control'
+        .form-group
+          = f.label :city
+          = f.text_field :city, class: 'form-control'
+        .row
+          .form-group.col-md-6
+            = f.label :state
+            = f.select :state, states_options, {}, { class: 'form-control' }
+          .form-group.col-md-6
+            = f.label :zipcode
+            = f.text_field :zipcode, class: 'form-control'
+        %h3 Payment Info
+        .form-group
+          = f.label :payment_method, "Payment Method"
+          = f.text_field :payment_method, class: 'form-control'
+        .form-group
+          = f.label :payment_street, "Street Address"
+          = f.text_field :payment_street, class: 'form-control'
+        .form-group
+          = f.label :payment_city, "City"
+          = f.text_field :payment_city, class: 'form-control'
+        .row
+          .form-group.col-md-6
+            = f.label :payment_state, "State"
+            = f.select :payment_state, states_options, {}, { class: 'form-control' }
+          .form-group.col-md-6
+            = f.label :payment_zipcode, "Zipcode"
+            = f.text_field :payment_zipcode, class: 'form-control'
+        %h3 Additional Info
+        .form-group
+          = f.label :calendly_link, "Calendly Link"
+          = f.text_field :calendly_link, class: 'form-control'
+        .form-group
+          = f.label :background
+          = f.text_area :background, class: 'form-control'
+        .form-group
+          = f.label :notes
+          = f.text_area :notes, class: 'form-control'
+      %h3 Choose User's Password
       .form-group
-        = f.label :password, "Choose User's Password"
-        = f.password_field :password, class: 'form-control'
+        = f.password_field :password, class: 'form-control', placeholder: "Password"
+      .form-group
+        = f.password_field :password_confirmation, class: 'form-control', placeholder: "Confirm Password"
         %span.help-block The user will be able to change this once they log in.
-      .form-group
-        = f.label :password_confirmation, "Confirm Password"
-        = f.password_field :password_confirmation, class: 'form-control'
 
-
-      = f.submit "Create", class: "btn btn-primary"
-      = link_to "Cancel", admin_index_path, class: "btn btn-default"
+      .submit-buttons
+        = f.submit "Create", class: "btn btn-primary"
+        = link_to "Cancel", admin_index_path, class: "btn btn-default"

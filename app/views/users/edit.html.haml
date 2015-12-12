@@ -31,6 +31,51 @@
           = f.label :admin, "Is this user an Admin?"
           %br
           = f.select :admin, [['No', false], ['Yes', true]], class: 'form-control'
+      - unless @user.admin?
+        .form-group
+          = f.label :phone, "Phone Number"
+          = f.telephone_field :phone, class: 'form-control'
+        %h3 Address Info
+        .form-group
+          = f.label :street, "Street"
+          = f.text_field :street, class: 'form-control'
+        .form-group
+          = f.label :city
+          = f.text_field :city, class: 'form-control'
+        .row
+          .form-group.col-md-6
+            = f.label :state
+            = f.select :state, states_options, {}, { class: 'form-control' }
+          .form-group.col-md-6
+            = f.label :zipcode
+            = f.text_field :zipcode, class: 'form-control'
+        %h3 Payment Info
+        .form-group
+          = f.label :payment_method, "Payment Method"
+          = f.text_field :payment_method, class: 'form-control'
+        .form-group
+          = f.label :payment_street, "Street Address"
+          = f.text_field :payment_street, class: 'form-control'
+        .form-group
+          = f.label :payment_city, "City"
+          = f.text_field :payment_city, class: 'form-control'
+        .row
+          .form-group.col-md-6
+            = f.label :payment_state, "State"
+            = f.select :payment_state, states_options, {}, { class: 'form-control' }
+          .form-group.col-md-6
+            = f.label :payment_zipcode, "Zipcode"
+            = f.text_field :payment_zipcode, class: 'form-control'
+        %h3 Additional Info
+        .form-group
+          = f.label :calendly_link, "Calendly Link"
+          = f.text_field :calendly_link, class: 'form-control'
+        .form-group
+          = f.label :background
+          = f.text_area :background, class: 'form-control'
+        .form-group
+          = f.label :notes
+          = f.text_area :notes, class: 'form-control'
       .form-group
         = f.label :password, "Change Password"
         = f.password_field :password, class: 'form-control', placeholder: "Optional"

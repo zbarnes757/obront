@@ -12,6 +12,19 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  classification   :integer          default(0)
+#  phone            :string
+#  street           :string
+#  city             :string
+#  state            :string
+#  zipcode          :string
+#  payment_method   :string
+#  payment_street   :string
+#  payment_city     :string
+#  payment_state    :string
+#  payment_zipcode  :string
+#  calendly_link    :string
+#  background       :text
+#  notes            :text
 #
 # Indexes
 #
