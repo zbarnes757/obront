@@ -18,12 +18,8 @@
 #  state            :string
 #  zipcode          :string
 #  payment_method   :string
-#  payment_street   :string
-#  payment_city     :string
-#  payment_state    :string
-#  payment_zipcode  :string
+#  payment_address  :string
 #  calendly_link    :string
-#  background       :text
 #  notes            :text
 #
 # Indexes

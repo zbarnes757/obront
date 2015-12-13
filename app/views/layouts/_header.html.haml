@@ -7,20 +7,25 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand Book in a Box
+      - if current_user.admin?
+        = link_to "Book in a Box", admin_index_path, class: "navbar-brand"
+      - else
+        %a.navbar-brand Book in a Box
     / Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
         - unless current_user.admin?
           %li
-            = link_to 'Your Settings', user_path(current_user)
-        %li
-          = link_to 'Edit Your Settings', edit_user_path(current_user)
+            = link_to 'Home', user_path(current_user)
+          %li
+            = link_to 'Edit Your Settings', edit_user_path(current_user)
       %ul.nav.navbar-nav.navbar-right
         - if current_user.admin?
           %li
             = link_to 'Add User', new_user_path
           %li
             = link_to 'See All Editors', admin_index_path
+          %li
+            = link_to 'Edit Your Settings', edit_user_path(current_user)
         %li
           = link_to 'Sign Out', signout_path

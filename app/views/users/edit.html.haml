@@ -7,20 +7,29 @@
   .col-md-6.col-md-offset-3
     = form_for @user do |f|
 
-      .form-group
-        = f.label :first_name
-        = f.text_field :first_name, class: 'form-control'
-      .form-group
-        = f.label :last_name
-        = f.text_field :last_name, class: 'form-control'
+      .row
+        .col-md-6
+          .form-group
+            = f.label :first_name
+            = f.text_field :first_name, class: 'form-control'
+        .col-md-6
+          .form-group
+            = f.label :last_name
+            = f.text_field :last_name, class: 'form-control'
       .form-group
         = f.label :email
         = f.email_field :email, class: 'form-control'
       - unless @user.admin?
         .form-group
+          = f.label :phone, "Phone Number"
+          = f.telephone_field :phone, class: 'form-control'
+        .form-group
+          = f.label :calendly_link, "Calendly Link"
+          = f.text_field :calendly_link, class: 'form-control'
+        .form-group
           = f.label :looking_for_work, "Looking for work?"
           %br
-          = f.select :looking_for_work, [['YES, I WANT MORE WORK', true], ['NO, LEAVE ME ALONE', false ]], class: 'form-control'
+          = f.select :looking_for_work, [['Available for Work', true], ['Currently Busy', false ]], {}, class: 'form-control'
       - if current_user.admin? && !@user.admin?
         .form-group
           = f.label :classification, "Editor Classification"
@@ -33,13 +42,17 @@
           = f.select :admin, [['No', false], ['Yes', true]], class: 'form-control'
       - unless @user.admin?
         %h3 Interests
-        - Category.all.each do |category|
-          .checkbox
-            = check_box_tag "category[]", category.id, @user.has_interest?(category.id), class: "interests-new"
-            = label_tag :category, category.pretty_name
-        .form-group
-          = f.label :phone, "Phone Number"
-          = f.telephone_field :phone, class: 'form-control'
+        .row
+          .col-md-6
+            - Category.all[0..5].each do |category|
+              .checkbox
+                = check_box_tag "category[]", category.id, @user.has_interest?(category.id), class: "interests-new"
+                = label_tag :category, category.pretty_name
+          .col-md-6
+            - Category.all[6..-1].each do |category|
+              .checkbox
+                = check_box_tag "category[]", category.id, @user.has_interest?(category.id), class: "interests-new"
+                = label_tag :category, category.pretty_name
         %h3 Address Info
         .form-group
           = f.label :street, "Street"
@@ -52,35 +65,16 @@
             = f.label :state
             = f.select :state, states_options, {}, { class: 'form-control' }
           .form-group.col-md-6
-            = f.label :zipcode
+            = f.label :zipcode, "Zip / Postal Code"
             = f.text_field :zipcode, class: 'form-control'
         %h3 Payment Info
         .form-group
           = f.label :payment_method, "Payment Method"
-          = f.text_field :payment_method, class: 'form-control'
+          = f.select :payment_method, [ "Dwolla", "Paypal", "Check" ], {}, class: 'form-control'
         .form-group
-          = f.label :payment_street, "Street Address"
-          = f.text_field :payment_street, class: 'form-control'
-        .form-group
-          = f.label :payment_city, "City"
-          = f.text_field :payment_city, class: 'form-control'
-        .row
-          .form-group.col-md-6
-            = f.label :payment_state, "State"
-            = f.select :payment_state, states_options, {}, { class: 'form-control' }
-          .form-group.col-md-6
-            = f.label :payment_zipcode, "Zipcode"
-            = f.text_field :payment_zipcode, class: 'form-control'
-        %h3 Additional Info
-        .form-group
-          = f.label :calendly_link, "Calendly Link"
-          = f.text_field :calendly_link, class: 'form-control'
-        .form-group
-          = f.label :background
-          = f.text_area :background, class: 'form-control'
-        .form-group
-          = f.label :notes
-          = f.text_area :notes, class: 'form-control'
+          = f.label :payment_address, "Payment Address"
+          = f.text_field :payment_address, class: 'form-control'
+      %h3 Change Password
       .form-group
         = f.label :password, "Change Password"
         = f.password_field :password, class: 'form-control', placeholder: "Optional"
@@ -88,9 +82,9 @@
         = f.label :password_confirmation, "Confirm Change Password"
         = f.password_field :password_confirmation, class: 'form-control', placeholder: "Optional"
 
-
-      = f.submit "Update", class: "btn btn-primary"
-      - if current_user.admin?
-        = link_to "Cancel", admin_index_path, class: "btn btn-default"
-      - else
-        = link_to "Cancel", user_path(current_user), class: "btn btn-default"
+      .submit-buttons
+        = f.submit "Update", class: "btn btn-primary"
+        - if current_user.admin?
+          = link_to "Cancel", admin_index_path, class: "btn btn-default"
+        - else
+          = link_to "Cancel", user_path(current_user), class: "btn btn-default"

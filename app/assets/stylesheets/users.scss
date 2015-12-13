@@ -20,15 +20,37 @@
   }
 }
 
+.notes-section {
+  width: 75%;
+  margin: auto;
+  text-align: center;
+
+  label {
+    margin-bottom: 10px;
+  }
+
+  .btn.btn-primary {
+    margin: 15px;
+  }
+}
+
+.suggestion-box {
+  text-align: center;
+}
+
 .user-info {
   margin: 25px auto;
   text-align: center;
 }
 
 .submit-buttons {
-  margin: 15px auto 55px;
+  margin: 15px auto 125px;
 }
 
 .interests-new {
   margin-left: 0 !important;
+}
+
+.hint {
+  font-size: 13px;
 }

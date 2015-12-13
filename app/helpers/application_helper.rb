@@ -76,7 +76,8 @@ module ApplicationHelper
            ["WA", "Washington"],
            ["WI", "Wisconsin"],
            ["WV", "West Virginia"],
-           ["WY", "Wyoming"] ]
+           ["WY", "Wyoming"],
+           ["Outside US", "Outside US"] ]
   end
 
 end

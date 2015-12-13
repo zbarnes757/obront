@@ -1,50 +1,48 @@
 .row.headline.admin
   .col-md-6.col-md-offset-3
-    %h3 All Editors
+    %h3 What Type of Editor are You Looking for?
 
 .row
-  .col-md-6.col-md-offset-3
-    .search-buttons
-      = form_tag admin_index_path, method: "get", class: "form-inline"
-      .row.work-status-admin
-        %h4 Work Status
+  .col-md-10.col-md-offset-1
+    = form_tag admin_index_path, method: "get"
+    .row.search-options
+      .col-md-3
+        %h4 Looking for Work?
         .checkbox
-          = label_tag "Looking for work"
-          %br
-          = check_box_tag "looking_for_work[]", true, false
+          = check_box_tag "looking_for_work[]", true, false, class: "interests-new"
+          = label_tag "Yes"
         .checkbox
-          = label_tag "Not Looking for work"
-          %br
-          = check_box_tag "looking_for_work[]", false, false
-      .row.classification-admin
+          = check_box_tag "looking_for_work[]", false, false, class: "interests-new"
+          = label_tag "No"
+      .col-md-3
         %h4 Editor Classification
         .checkbox
+          = check_box_tag "classification[]", "a_list", false, class: "interests-new"
           = label_tag "A-List"
-          %br
-          = check_box_tag "classification[]", "a_list", false
         .checkbox
+          = check_box_tag "classification[]", "b_list", false, class: "interests-new"
           = label_tag "B-List"
-          %br
-          = check_box_tag "classification[]", "b_list", false
         .checkbox
+          = check_box_tag "classification[]", "first_assignment", false, class: "interests-new"
           = label_tag "First Assignment"
-          %br
-          = check_box_tag "classification[]", "first_assignment", false
         .checkbox
+          = check_box_tag "classification[]", "not_yet_assigned", false, class: "interests-new"
           = label_tag "Not Yet Assigned"
-          %br
-          = check_box_tag "classification[]", "not_yet_assigned", false
-      .row.categories-admin
-        %h4 Editor Interests
-        - Category.all.each do |category|
-          .checkbox
-            = label_tag category.pretty_name
-            %br
-            = check_box_tag "category[]", category.id, false
-
-      %span.help-block
-        Or select nothing and get everything. The world is yours.
-      = submit_tag "Search", class: "btn btn-default"
+      .col-md-5
+        %h4 Interests
+        .row
+          .col-md-6
+            - Category.all[0..5].each do |category|
+              .checkbox
+                = check_box_tag "category[]", category.id, false, class: "interests-new"
+                = label_tag category.pretty_name
+          .col-md-6
+            - Category.all[6..-1].each do |category|
+              .checkbox
+                = check_box_tag "category[]", category.id, false, class: "interests-new"
+                = label_tag category.pretty_name
+    .row
+      = submit_tag "Search", class: "btn btn-default submit-button"
 
 
 .row
@@ -59,7 +57,7 @@
           %th Email
           %th Looking for Work?
           %th Editor Classification
-          %th Interests
+          %th Notes
           %th
           %th
         - @editors.each do |editor|
@@ -70,13 +68,13 @@
               = editor.email
             %td
               - if editor.looking_for_work?
-                YES, I WANT MORE WORK
+                Available for Work
               - else
-                NO, LEAVE ME ALONE
+                Currently Busy
             %td
               = editor.pretty_classification
             %td
-              = editor.categories.pluck(:pretty_name).join(', ')
+              = editor.notes
             %td
               = link_to "Edit", edit_user_path(editor), class: "btn btn-default"
             %td
