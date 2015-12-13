@@ -55,27 +55,21 @@
         %tr
           %th Name
           %th Email
-          %th Looking for Work?
           %th Editor Classification
           %th Notes
           %th
           %th
         - @editors.each do |editor|
           %tr{ class: "#{ looking_for_work_class(editor) }"}
-            %td
+            %td{ width: "15%"}
               = editor.full_name
-            %td
+            %td{ width: "15%"}
               = editor.email
-            %td
-              - if editor.looking_for_work?
-                Available for Work
-              - else
-                Currently Busy
-            %td
+            %td{ width: "15%"}
               = editor.pretty_classification
-            %td
+            %td{ width: "25%"}
               = editor.notes
-            %td
+            %td{ width: "5%"}
               = link_to "Edit", edit_user_path(editor), class: "btn btn-default"
-            %td
+            %td{ width: "5%"}
               = link_to "Delete Editor", user_path(editor), method: :delete,  data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
