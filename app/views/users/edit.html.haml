@@ -18,7 +18,7 @@
             = f.text_field :last_name, class: 'form-control'
       .form-group
         = f.label :email
-        = f.email_field :email, class: 'form-control'
+        = f.email_field :email, value: @user.email, class: 'form-control'
       - unless @user.admin?
         .form-group
           = f.label :phone, "Phone Number"
