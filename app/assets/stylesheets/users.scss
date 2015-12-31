@@ -36,10 +36,18 @@
 
 .suggestion-box {
   text-align: left;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 30px 0px;
+  padding: 10px 0px 30px;
 
   h3 {
     text-align: center;
     margin-bottom: 25px;
+  }
+
+  li {
+    margin: 10px;
   }
 }
 
