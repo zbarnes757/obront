@@ -12,7 +12,7 @@
           %p Currently Busy
         = link_to "Change Status", change_status_path, class: "btn btn-#{looking_for_work_class(@user)}"
 .row
-  .col-md-6.col-md-offset-3
+  .col-md-8.col-md-offset-2
     .notes-section
       = form_for @user do |f|
         .form-group
@@ -21,9 +21,20 @@
 
           = f.submit "Save", class: "btn btn-primary"
     .suggestion-box
-      %a{ href: "https://bookinabox.wufoo.com/forms/zaam09q12tjaw5/", target: "_blank" }
-        Suggestion Box
-      %p What could we do to make your job better? Let us know here.
-      %a{ href: "https://docs.google.com/document/d/1mK042vYCVqXZ8-oh9dX4TsSCEg9RP1rEdlrIvb8eB8Y", target: "_blank" }
-        Editor Guide
-      %p Need more resources about how to be a BIAB Editor? The Editor Guide can help.
+      %h3 Resources
+      %p
+        %a{ href: "https://docs.google.com/document/d/1mK042vYCVqXZ8-oh9dX4TsSCEg9RP1rEdlrIvb8eB8Y", target: "_blank" }
+          Editor Guide:
+        The comprehensive guide to doing your job as a BIAB editor.
+      %p
+        %a{ href: "https://www.dropbox.com/request/sYoMH4RMI8zrjYI3YCjs", target: "_blank" }
+          Interview Submissions:
+        Here's the Dropbox link to submit your interview MP3s for transcription.
+      %p
+        %a{ href: "https://bookinabox.wufoo.com/forms/m4ysaqf0q87tkb/", target: "_blank" }
+          Final Manuscript Submission:
+        When the final manuscript is locked and edited, this is where it goes.
+      %p
+        %a{ href: "https://bookinabox.wufoo.com/forms/zaam09q12tjaw5/", target: "_blank" }
+          Suggestion Box:
+        What could we do to make your job better? Let us know here.

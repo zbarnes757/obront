@@ -35,7 +35,12 @@
 }
 
 .suggestion-box {
-  text-align: center;
+  text-align: left;
+
+  h3 {
+    text-align: center;
+    margin-bottom: 25px;
+  }
 }
 
 .user-info {
