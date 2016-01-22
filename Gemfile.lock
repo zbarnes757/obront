@@ -61,6 +61,9 @@ GEM
     columnize (0.9.0)
     concurrent-ruby (1.0.0)
     diff-lcs (1.2.5)
+    dotenv (2.0.1)
+    dotenv-rails (2.0.1)
+      dotenv (= 2.0.1)
     erubis (2.7.0)
     execjs (2.6.0)
     globalid (0.3.6)
@@ -202,6 +205,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootstrap-sass (~> 3.3.6)
   coffee-rails (~> 4.1.0)
+  dotenv-rails
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails

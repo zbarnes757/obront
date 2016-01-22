@@ -20,6 +20,7 @@ gem 'puma'
 gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'spring'
