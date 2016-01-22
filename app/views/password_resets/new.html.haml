@@ -1,0 +1,12 @@
+.row.headline.sessions
+  .col-md-6.col-md-offset-3
+    %h2 Forgot Your Password?
+
+.row.main-form
+  .col-md-6.col-md-offset-3
+    = form_tag password_resets_path, :method => :post do
+      .form-group
+        = label_tag :email
+        = text_field_tag :email, params[:email], class: "form-control"
+      .submit-buttons
+        = submit_tag "Reset Password", class: "btn btn-primary"

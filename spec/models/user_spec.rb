@@ -2,25 +2,27 @@
 #
 # Table name: users
 #
-#  id               :integer          not null, primary key
-#  first_name       :string
-#  last_name        :string
-#  password_digest  :string
-#  email            :string
-#  looking_for_work :boolean          default(FALSE)
-#  admin            :boolean          default(FALSE)
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  classification   :integer          default(0)
-#  phone            :string
-#  street           :string
-#  city             :string
-#  state            :string
-#  zipcode          :string
-#  payment_method   :string
-#  payment_address  :string
-#  calendly_link    :string
-#  notes            :text
+#  id                     :integer          not null, primary key
+#  first_name             :string
+#  last_name              :string
+#  password_digest        :string
+#  email                  :string
+#  looking_for_work       :boolean          default(FALSE)
+#  admin                  :boolean          default(FALSE)
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  classification         :integer          default(0)
+#  phone                  :string
+#  street                 :string
+#  city                   :string
+#  state                  :string
+#  zipcode                :string
+#  payment_method         :string
+#  payment_address        :string
+#  calendly_link          :string
+#  notes                  :text
+#  password_reset_token   :string
+#  password_reset_sent_at :datetime
 #
 # Indexes
 #

@@ -2,25 +2,27 @@
 #
 # Table name: users
 #
-#  id               :integer          not null, primary key
-#  first_name       :string
-#  last_name        :string
-#  password_digest  :string
-#  email            :string
-#  looking_for_work :boolean          default(FALSE)
-#  admin            :boolean          default(FALSE)
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  classification   :integer          default(0)
-#  phone            :string
-#  street           :string
-#  city             :string
-#  state            :string
-#  zipcode          :string
-#  payment_method   :string
-#  payment_address  :string
-#  calendly_link    :string
-#  notes            :text
+#  id                     :integer          not null, primary key
+#  first_name             :string
+#  last_name              :string
+#  password_digest        :string
+#  email                  :string
+#  looking_for_work       :boolean          default(FALSE)
+#  admin                  :boolean          default(FALSE)
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  classification         :integer          default(0)
+#  phone                  :string
+#  street                 :string
+#  city                   :string
+#  state                  :string
+#  zipcode                :string
+#  payment_method         :string
+#  payment_address        :string
+#  calendly_link          :string
+#  notes                  :text
+#  password_reset_token   :string
+#  password_reset_sent_at :datetime
 #
 # Indexes
 #
@@ -49,6 +51,12 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while User.exists?(column => self[column])
+  end
+
   def has_interest?(category_id)
     ids = interests.pluck(:category_id)
     ids.include?(category_id.to_i)
@@ -66,5 +74,13 @@ class User < ActiveRecord::Base
       "A-list"
     end
   end
+
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    UserMailer.password_reset(self).deliver
+  end
+
 
 end

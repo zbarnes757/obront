@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   get "/signout", to: "sessions#destroy", as: :signout
   resources :users, except: :index
   get "/change-status", to: "users#insta_change_status", as: :change_status
+  resources :password_resets
 
 end
