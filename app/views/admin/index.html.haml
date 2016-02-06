@@ -1,6 +1,6 @@
 .row.headline.admin
   .col-md-6.col-md-offset-3
-    %h3 What Type of Editor are You Looking for?
+    %h3 What Kind of Freelancer are You Looking for?
 
 .row
   .col-md-10.col-md-offset-1
@@ -15,19 +15,25 @@
           = check_box_tag "looking_for_work[]", false, false, class: "interests-new"
           = label_tag "No"
       .col-md-3
-        %h4 Editor Classification
+        %h4 Freelancer Classification
         .checkbox
           = check_box_tag "classification[]", "a_list", false, class: "interests-new"
-          = label_tag "A-List"
+          = label_tag "A-List Editor"
         .checkbox
           = check_box_tag "classification[]", "b_list", false, class: "interests-new"
-          = label_tag "B-List"
+          = label_tag "B-List Editor"
         .checkbox
           = check_box_tag "classification[]", "first_assignment", false, class: "interests-new"
-          = label_tag "First Assignment"
+          = label_tag "First Assignment Editor"
         .checkbox
           = check_box_tag "classification[]", "not_yet_assigned", false, class: "interests-new"
-          = label_tag "Not Yet Assigned"
+          = label_tag "Not Yet Assigned Editor"
+        .checkbox
+          = check_box_tag "classification[]", "a_list_outliner", false, class: "interests-new"
+          = label_tag "A-List Outliner"
+        .checkbox
+          = check_box_tag "classification[]", "trial_period", false, class: "interests-new"
+          = label_tag "Trial Period Outliner"
       .col-md-5
         %h4 Interests
         .row
@@ -77,7 +83,7 @@
         %tr
           %th Name
           %th Email
-          %th Editor Classification
+          %th Freelancer Classification
           %th Notes
           %th
           %th

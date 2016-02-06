@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   has_many :interests
   has_many :categories, through: :interests
 
-  enum classification: [ :not_yet_assigned, :first_assignment, :b_list, :a_list ]
+  enum classification: [ :not_yet_assigned, :first_assignment, :b_list, :a_list, :a_list_outliner, :trial_period ]
 
   scope :editors, -> { where(admin: false) }
 
