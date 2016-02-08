@@ -17,11 +17,14 @@
       .col-md-3
         %h4 Freelancer Classification
         .checkbox
+          = check_box_tag "classification[]", "all_star", false, class: "interests-new"
+          = label_tag "All Star Editor"
+        .checkbox
           = check_box_tag "classification[]", "a_list", false, class: "interests-new"
-          = label_tag "A-List Editor"
+          = label_tag "Veteran Editor"
         .checkbox
           = check_box_tag "classification[]", "b_list", false, class: "interests-new"
-          = label_tag "B-List Editor"
+          = label_tag "Probationary Editor"
         .checkbox
           = check_box_tag "classification[]", "first_assignment", false, class: "interests-new"
           = label_tag "First Assignment Editor"

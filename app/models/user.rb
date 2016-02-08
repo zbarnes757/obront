@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   has_many :interests
   has_many :categories, through: :interests
 
-  enum classification: [ :not_yet_assigned, :first_assignment, :b_list, :a_list, :a_list_outliner, :trial_period ]
+  enum classification: [ :not_yet_assigned, :first_assignment, :b_list, :a_list, :a_list_outliner, :trial_period, :all_star ]
 
   scope :editors, -> { where(admin: false) }
 
@@ -65,13 +65,19 @@ class User < ActiveRecord::Base
   def pretty_classification
     case classification
     when "not_yet_assigned"
-      "Not Yet Assigned"
+      "Not Yet Assigned Editor"
     when "first_assignment"
-      "First Assignment"
+      "First Assignment Editor"
     when "b_list"
-      "B-list"
+      "Probationary Editor"
     when "a_list"
-      "A-list"
+      "Veteran Editor"
+    when "all_star"
+      "All Star Editor"
+    when "a_list_outliner"
+      "A List Outliner"
+    when "trial_period"
+      "Trial Period Outliner"
     end
   end
 
