@@ -32,8 +32,11 @@
           = check_box_tag "classification[]", "not_yet_assigned", false, class: "interests-new"
           = label_tag "Not Yet Assigned Editor"
         .checkbox
+          = check_box_tag "classification[]", "all_star_outliner", false, class: "interests-new"
+          = label_tag "All Star Outliners"
+        .checkbox
           = check_box_tag "classification[]", "a_list_outliner", false, class: "interests-new"
-          = label_tag "A-List Outliner"
+          = label_tag "Veteran Outliners"
         .checkbox
           = check_box_tag "classification[]", "trial_period", false, class: "interests-new"
           = label_tag "Trial Period Outliner"
