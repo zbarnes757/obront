@@ -33,7 +33,7 @@
         .form-group
           = f.label :classification, "Editor Classification"
           %br
-          = f.select :classification, [["Not Yet Assigned Editor", :not_yet_assigned], ["First Assingment Editor", :first_assignment], ["Probationary Editor", :b_list], ["Veteran Editor", :a_list], ["All Star Editor", :all_star], ["All Star Outliners", :all_star_outliner], ["Veteran Outliners", :a_list_outliner], ["Trial Period Outliner", :trial_period]], {}, { class: "form-control" }
+          = f.select :classification, admin_search_options, {}, { class: "form-control" }
       - if current_user.admin?
         .form-group
           = f.label :admin, "Is this user an Admin?"

@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   has_many :interests
   has_many :categories, through: :interests
 
-  enum classification: [ :not_yet_assigned, :first_assignment, :b_list, :a_list, :a_list_outliner, :trial_period, :all_star, :all_star_outliner ]
+  enum classification: [ :not_yet_assigned, :first_assignment, :b_list, :a_list, :a_list_outliner, :trial_period, :all_star, :all_star_outliner, :proof_reader, :cover_designer ]
 
   scope :editors, -> { where(admin: false) }
 
@@ -80,6 +80,10 @@ class User < ActiveRecord::Base
       "Trial Period Outliner"
     when "all_star_outliner"
       "All Star Outliner"
+    when "proof_reader"
+      "Proofreader"
+    when "cover_designer"
+      "Cover Designer"
     end
   end
 

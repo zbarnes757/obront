@@ -10,13 +10,16 @@ module ApplicationHelper
 
   def admin_search_options
     [
-      ["All Editors", :all],
-      ["Only Looking for work", :looking_for_work],
-      ["Not Looking for work", :not_looking_for_work],
-      ["A-list Editors", :a_list],
-      ["B-list Editors", :b_list],
-      ["First Assigment", :first_assignment ],
-      ["Not Yet Assigned", :not_yet_assigned]
+      ["Not Yet Assigned Editor", :not_yet_assigned],
+      ["First Assingment Editor", :first_assignment],
+      ["Probationary Editor", :b_list],
+      ["Veteran Editor", :a_list],
+      ["All Star Editor", :all_star],
+      ["All Star Outliners", :all_star_outliner],
+      ["Veteran Outliners", :a_list_outliner],
+      ["Trial Period Outliner", :trial_period],
+      ["Proofreader", :proof_reader],
+      ["Cover Designer", :cover_designer]
     ]
   end
 
