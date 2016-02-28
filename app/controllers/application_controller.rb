@@ -10,6 +10,22 @@ class ApplicationController < ActionController::Base
     User.find(session[:user_id]) if session[:user_id]
   end
 
+  def freelancer_board
+    Trello::Board.find(ENV['FREELANCER_BOARD'])
+  end
+
+  def available_label
+    Trello::Label.find(ENV['AVAILABLE_LABEL'])
+  end
+
+  def not_available_label
+    Trello::Label.find(ENV['NOT_AVAILABLE_LABEL'])
+  end
+
+  def get_card(card_id)
+    Trello::Card.find(card_id)
+  end
+
   def require_admin_login
     unless current_user && current_user.admin?
       redirect_to new_session_path and return

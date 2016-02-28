@@ -40,15 +40,60 @@ class User < ActiveRecord::Base
 
   attr_accessor :category
 
-  has_many :interests
+  has_many :interests, dependent: :destroy
   has_many :categories, through: :interests
 
-  enum classification: [ :not_yet_assigned, :first_assignment, :b_list, :a_list, :a_list_outliner, :trial_period, :all_star, :all_star_outliner, :proof_reader, :cover_designer ]
+  enum classification: [ :not_yet_assigned,
+                         :first_assignment,
+                         :b_list,
+                         :a_list,
+                         :a_list_outliner,
+                         :trial_period,
+                         :all_star,
+                         :all_star_outliner,
+                         :proof_reader,
+                         :cover_designer ]
 
   scope :editors, -> { where(admin: false) }
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def build_comment
+    "@#{ENV['TRELLO_USER']}\n #{email}\n #{pretty_classification}\n #{phone}\n #{street}, #{city}, #{state}, #{zipcode}\n #{payment_method}\n #{payment_address}\n #{calendly_link}\n #{notes}"
+  end
+
+  def build_description
+    %(
+      \n\<Choose correct labels above\>
+      \nContact Information:
+      \n-#{ email }
+      -#{ phone != "" ? phone : "\<Cell\>" }
+      -#{ calendly_link != "" ? calendly_link : "\<Calendly Link\>" }
+      General:
+      \n-Unique Skillsets: \<Insert/example: Great "fixer\>
+      -Interest/Preference: \<Insert\>
+      -Notes from Freelancer directly: #{ notes != "" || "\<Insert\>" }
+      -Currently Assigned Books: \<Link Project Boards\>
+      -If no longer working with us: \<Insert reason/archive card - need "firing process?"\>
+      Additional Contact Information:
+      \n-#{ street != "" && city != "" && state != "" && zipcode != "" ? "#{street}, #{city}, #{state}, #{zipcode}" : "\<Address, City, State, Zip, Time Zone\)" }
+      -\<Misc: Gender, DOB/Year, Optional\>
+      -\<Social Media Links, Optional\>
+      Pay Information:
+      \n-\<Pay Rate/Hour\>
+      -\<W-9 received, Yes/No\>
+      -\<Payment email if different\>
+      Bio:
+      \n-\<Insert copy or link or attachment\>
+      Referral:
+      \n-\<Source of referral including name if applicable\>
+      Gift Log:
+      \n-\<Insert details if any\>
+      Previous BIAB books:
+      \n-\<Link to closed boards\>
+      )
   end
 
   def generate_token(column)
