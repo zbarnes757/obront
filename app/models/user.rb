@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
   end
 
   def build_comment
-    "@#{ENV['TRELLO_USER']}\n #{email}\n #{pretty_classification}\n #{phone}\n #{street}, #{city}, #{state}, #{zipcode}\n #{payment_method}\n #{payment_address}\n #{calendly_link}\n #{notes}"
+    "#{ENV['TRELLO_USER']}\nemail: #{email}\nclassification: #{pretty_classification}\nphone: #{phone}\naddress: #{street}, #{city}, #{state}, #{zipcode}\npayment method: #{payment_method}\npayment address: #{payment_address}\ncalendly link: #{calendly_link}\nnotes: #{notes}\ninterests: #{categories.pluck(:pretty_name).join(', ')} "
   end
 
   def build_description
@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
       -#{ calendly_link != "" ? calendly_link : "\<Calendly Link\>" }
       General:
       \n-Unique Skillsets: \<Insert/example: Great "fixer\>
-      -Interest/Preference: \<Insert\>
+      -Interest/Preference: #{categories.length > 0 ? categories.pluck(:pretty_name).join(', ') : "\<Insert\>"}
       -Notes from Freelancer directly: #{ notes != "" || "\<Insert\>" }
       -Currently Assigned Books: \<Link Project Boards\>
       -If no longer working with us: \<Insert reason/archive card - need "firing process?"\>
