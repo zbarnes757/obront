@@ -75,14 +75,14 @@ class UsersController < ApplicationController
   def change_trello_label(user)
     freelancer_board.cards.each do |card|
       if card.name == user.full_name
-        swap_working_label(card)
+        swap_working_label(card, user)
         swap_interest_labels(card, user)
         break
       end
     end
   end
 
-  def swap_working_label(card)
+  def swap_working_label(card, user)
     if card.labels.any? { |label| label.id == available_label.id } && !user.looking_for_work
       card.remove_label(available_label)
       card.add_label(not_available_label)
@@ -93,10 +93,27 @@ class UsersController < ApplicationController
   end
 
   def swap_interest_labels(card, user)
-    interest_ids = user.get_interest_label
+    all_interest_ids = [
+      "56ca0559152c3f92fd1ce619",
+      "56ca0561152c3f92fd1ce61b",
+      "56ca056f152c3f92fd1ce64e",
+      "56ca0575152c3f92fd1ce667",
+      "56ca0580152c3f92fd1ce687",
+      "56ca0587152c3f92fd1ce6a0",
+      "56ca0590152c3f92fd1ce6a8",
+      "56ca0598152c3f92fd1ce6b5",
+      "56ca059c152c3f92fd1ce6c3",
+      "56ca05a5152c3f92fd1ce6e3",
+      "56ca05aa152c3f92fd1ce6f8",
+      "56ca05af152c3f92fd1ce6f9"
+    ]
+    existing_labels = card.labels.map { |label| label.id }
+    user_interest_ids = user.get_interest_label
     card.labels.each do |label|
-      card.remove_label(label) if !interest_ids.include?(label.id)
-      card.add_label(label) if interest_ids.include?(label.id)
+      card.remove_label(label) if !user_interest_ids.include?(label.id) && all_interest_ids.include?(label.id)
+    end
+    user_interest_ids.each do |id|
+      card.add_label(Trello::Label.find(id)) if !existing_labels.include?(id)
     end
   end
 
