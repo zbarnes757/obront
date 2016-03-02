@@ -75,16 +75,28 @@ class UsersController < ApplicationController
   def change_trello_label(user)
     freelancer_board.cards.each do |card|
       if card.name == user.full_name
-        if card.labels.any? { |label| label.id == available_label.id } && !user.looking_for_work
-          card.remove_label(available_label)
-          card.add_label(not_available_label)
-          break
-        elsif card.labels.any? { |label| label.id == not_available_label.id } && user.looking_for_work
-          card.remove_label(not_available_label)
-          card.add_label(available_label)
-          break
-        end
+        swap_working_label(card)
+        swap_interest_labels(card, user)
+        break
       end
+    end
+  end
+
+  def swap_working_label(card)
+    if card.labels.any? { |label| label.id == available_label.id } && !user.looking_for_work
+      card.remove_label(available_label)
+      card.add_label(not_available_label)
+    elsif card.labels.any? { |label| label.id == not_available_label.id } && user.looking_for_work
+      card.remove_label(not_available_label)
+      card.add_label(available_label)
+    end
+  end
+
+  def swap_interest_labels(card, user)
+    interest_ids = user.get_interest_label
+    card.labels.each do |label|
+      card.remove_label(label) if !interest_ids.include?(label.id)
+      card.add_label(label) if interest_ids.include?(label.id)
     end
   end
 
@@ -96,12 +108,14 @@ class UsersController < ApplicationController
   end
 
   def create_trello_card
-    label_id = @user.looking_for_work ? available_label.id : not_available_label.id
+    looking_for_work_label = @user.looking_for_work ? available_label.id : not_available_label.id
+    category_label = @user.get_category_label
+    interest_label = @user.get_interest_label.join(',')
 
     Trello::Card.create({
       name: @user.full_name,
       list_id: ENV['NOT_YET_ASSIGNED_LIST'],
-      card_labels: label_id,
+      card_labels: [ looking_for_work_label, category_label, interest_label ].join(","),
       desc: @user.build_description
       })
   end

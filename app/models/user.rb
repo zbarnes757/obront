@@ -102,6 +102,22 @@ class User < ActiveRecord::Base
     end while User.exists?(column => self[column])
   end
 
+  def get_category_label
+    if not_yet_assigned? || first_assignment? || b_list? || a_list? || all_star?
+      freelancer_category_labels[:editor]
+    elsif a_list_outliner? || trial_period? || all_star_outliner?
+      freelancer_category_labels[:outliner]
+    elsif proof_reader?
+      freelancer_category_labels[:proof_reader]
+    elsif cover_designer?
+      freelancer_category_labels[:cover_designer]
+    end
+  end
+
+  def get_interest_label
+    categories.pluck(:name).map { |name| interest_labels[name] }
+  end
+
   def has_interest?(category_id)
     ids = interests.pluck(:category_id)
     ids.include?(category_id.to_i)
@@ -130,6 +146,33 @@ class User < ActiveRecord::Base
     when "cover_designer"
       "Cover Designer"
     end
+  end
+
+  def freelancer_category_labels
+    {
+      editor: "56c21ad3152c3f92fd0687c9",
+      outliner: "56c21ac8152c3f92fd068793",
+      proof_reader: "56c21adb152c3f92fd0687e2",
+      cover_designer: "56c21af1152c3f92fd06884f"
+    }
+  end
+
+
+  def interest_labels
+    {
+      "business" => "56ca0559152c3f92fd1ce619",
+      "personal_finance" => "56ca0561152c3f92fd1ce61b",
+      "sales_and_marketing" => "56ca056f152c3f92fd1ce64e",
+      "career_development" => "56ca0575152c3f92fd1ce667",
+      "self_improvement" => "56ca0580152c3f92fd1ce687",
+      "health_fitness" => "56ca0587152c3f92fd1ce6a0",
+      "science" => "56ca0590152c3f92fd1ce6a8",
+      "spirituality" => "56ca0598152c3f92fd1ce6b5",
+      "sports" => "56ca059c152c3f92fd1ce6c3",
+      "technology" => "56ca05a5152c3f92fd1ce6e3",
+      "memoir" => "56ca05aa152c3f92fd1ce6f8",
+      "miscellaneous" => "56ca05af152c3f92fd1ce6f9"
+    }
   end
 
   def send_password_reset
