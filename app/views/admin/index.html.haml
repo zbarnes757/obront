@@ -17,35 +17,26 @@
       .col-md-3
         %h4 Freelancer Classification
         .checkbox
-          = check_box_tag "classification[]", "all_star", false, class: "interests-new"
-          = label_tag "All Star Editor"
+          = check_box_tag "classification[]", "editor", false, class: "interests-new"
+          = label_tag "Editor"
         .checkbox
-          = check_box_tag "classification[]", "a_list", false, class: "interests-new"
-          = label_tag "Veteran Editor"
-        .checkbox
-          = check_box_tag "classification[]", "b_list", false, class: "interests-new"
-          = label_tag "Probationary Editor"
-        .checkbox
-          = check_box_tag "classification[]", "first_assignment", false, class: "interests-new"
-          = label_tag "First Assignment Editor"
-        .checkbox
-          = check_box_tag "classification[]", "not_yet_assigned", false, class: "interests-new"
-          = label_tag "Not Yet Assigned Editor"
-        .checkbox
-          = check_box_tag "classification[]", "all_star_outliner", false, class: "interests-new"
-          = label_tag "All Star Outliners"
-        .checkbox
-          = check_box_tag "classification[]", "a_list_outliner", false, class: "interests-new"
-          = label_tag "Veteran Outliners"
-        .checkbox
-          = check_box_tag "classification[]", "trial_period", false, class: "interests-new"
-          = label_tag "Trial Period Outliner"
+          = check_box_tag "classification[]", "book_developer", false, class: "interests-new"
+          = label_tag "Book Developer"
         .checkbox
           = check_box_tag "classification[]", "proof_reader", false, class: "interests-new"
           = label_tag "Proofreader"
         .checkbox
           = check_box_tag "classification[]", "cover_designer", false, class: "interests-new"
           = label_tag "Cover Designer"
+        .checkbox
+          = check_box_tag "classification[]", "copywriter", false, class: "interests-new"
+          = label_tag "Copywriter"
+        .checkbox
+          = check_box_tag "classification[]", "interior_layout_designer", false, class: "interests-new"
+          = label_tag "Interior Layout Designer"
+        .checkbox
+          = check_box_tag "classification[]", "book_marketer", false, class: "interests-new"
+          = label_tag "Book Marketer"
       .col-md-5
         %h4 Interests
         .row

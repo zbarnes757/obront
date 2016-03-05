@@ -148,9 +148,7 @@ class UsersController < ApplicationController
   def update_interests
     if params[:category]
       @user.interests.delete_all
-      params[:category].each do |category_id|
-        @user.interests.create(category_id: category_id.to_i)
-      end
+      params[:category].each { |category_id| @user.interests.create(category_id: category_id.to_i) }
     end
   end
 

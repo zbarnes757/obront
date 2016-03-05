@@ -43,16 +43,14 @@ class User < ActiveRecord::Base
   has_many :interests, dependent: :destroy
   has_many :categories, through: :interests
 
-  enum classification: [ :not_yet_assigned,
-                         :first_assignment,
-                         :b_list,
-                         :a_list,
-                         :a_list_outliner,
-                         :trial_period,
-                         :all_star,
-                         :all_star_outliner,
-                         :proof_reader,
-                         :cover_designer ]
+  enum classification: [ :editor,
+                         :book_developer,
+                         :proofreader,
+                         :cover_designer,
+                         :copywriter,
+                         :interior_layout_designer,
+                         :book_marketer ]
+
 
   scope :editors, -> { where(admin: false) }
 
@@ -103,15 +101,7 @@ class User < ActiveRecord::Base
   end
 
   def get_category_label
-    if not_yet_assigned? || first_assignment? || b_list? || a_list? || all_star?
-      freelancer_category_labels[:editor]
-    elsif a_list_outliner? || trial_period? || all_star_outliner?
-      freelancer_category_labels[:outliner]
-    elsif proof_reader?
-      freelancer_category_labels[:proof_reader]
-    elsif cover_designer?
-      freelancer_category_labels[:cover_designer]
-    end
+    freelancer_category_labels[classification] unless copywriter? || book_marketer?
   end
 
   def get_interest_label
@@ -125,35 +115,32 @@ class User < ActiveRecord::Base
 
   def pretty_classification
     case classification
-    when "not_yet_assigned"
-      "Not Yet Assigned Editor"
-    when "first_assignment"
-      "First Assignment Editor"
-    when "b_list"
-      "Probationary Editor"
-    when "a_list"
-      "Veteran Editor"
-    when "all_star"
-      "All Star Editor"
-    when "a_list_outliner"
-      "Veteran Outliners"
-    when "trial_period"
-      "Trial Period Outliner"
-    when "all_star_outliner"
-      "All Star Outliner"
+    when "editor"
+      "Editor"
+    when "book_developer"
+      "Book Developer"
     when "proof_reader"
       "Proofreader"
     when "cover_designer"
       "Cover Designer"
+    when "copywriter"
+      "Copywriter"
+    when "interior_layout_designer"
+      "Interior Layout Designer"
+    when "book_marketer"
+      "Book Marketer"
     end
   end
 
   def freelancer_category_labels
     {
-      editor: "56c21ad3152c3f92fd0687c9",
-      outliner: "56c21ac8152c3f92fd068793",
-      proof_reader: "56c21adb152c3f92fd0687e2",
-      cover_designer: "56c21af1152c3f92fd06884f"
+      "editor" => "56c21ad3152c3f92fd0687c9",
+      "book_developer" => "56c21ac8152c3f92fd068793",
+      "proof_reader" => "56c21adb152c3f92fd0687e2",
+      "cover_designer" => "56c21af1152c3f92fd06884f",
+      # "copywriter" => "",
+      "interior_layout_designer" => "56c21ae5152c3f92fd06880d"
+      # "book_marketer" => ""
     }
   end
 
