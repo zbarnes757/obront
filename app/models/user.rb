@@ -139,7 +139,7 @@ class User < ActiveRecord::Base
       "proof_reader" => "56c21adb152c3f92fd0687e2",
       "cover_designer" => "56c21af1152c3f92fd06884f",
       "copywriter" => "56ddb3da152c3f92fd51207f",
-      "interior_layout_designer" => "56c21ae5152c3f92fd06880d"
+      "interior_layout_designer" => "56c21ae5152c3f92fd06880d",
       "book_marketer" => "56ddb3f7152c3f92fd5120cd"
     }
   end
