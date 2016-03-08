@@ -101,7 +101,7 @@ class User < ActiveRecord::Base
   end
 
   def get_category_label
-    freelancer_category_labels[classification] unless copywriter? || book_marketer?
+    freelancer_category_labels[classification]
   end
 
   def get_interest_label
@@ -138,9 +138,9 @@ class User < ActiveRecord::Base
       "book_developer" => "56c21ac8152c3f92fd068793",
       "proof_reader" => "56c21adb152c3f92fd0687e2",
       "cover_designer" => "56c21af1152c3f92fd06884f",
-      # "copywriter" => "",
+      "copywriter" => "56ddb3da152c3f92fd51207f",
       "interior_layout_designer" => "56c21ae5152c3f92fd06880d"
-      # "book_marketer" => ""
+      "book_marketer" => "56ddb3f7152c3f92fd5120cd"
     }
   end
 
