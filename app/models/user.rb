@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
 
   enum classification: [ :editor,
                          :book_developer,
-                         :proofreader,
+                         :proof_reader,
                          :cover_designer,
                          :copywriter,
                          :interior_layout_designer,
