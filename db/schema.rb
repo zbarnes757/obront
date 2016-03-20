@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122005030) do
+ActiveRecord::Schema.define(version: 20160320153216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20160122005030) do
     t.text     "notes"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.boolean  "employed",               default: false
   end
 
   add_index "users", ["admin"], name: "index_users_on_admin", using: :btree

@@ -169,7 +169,8 @@ class UsersController < ApplicationController
                                  :payment_address,
                                  :payment_method,
                                  :calendly_link,
-                                 :notes)
+                                 :notes,
+                                 :employed)
   end
 
 end

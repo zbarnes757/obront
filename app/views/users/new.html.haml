@@ -28,6 +28,10 @@
           %br
           = f.select :classification, admin_search_options, {}, { class: 'form-control' }
         .form-group
+          = f.label :employed, "Are you currently employed full-time?"
+          %br
+          = f.select :employed, [['Yes', true], ['No', false ]], {}, class: 'form-control'
+        .form-group
           = f.label :looking_for_work, "Looking for work?"
           %br
           = f.select :looking_for_work, [['YES, I WANT MORE WORK', true], ['NO, LEAVE ME ALONE', false ]], {}, { class: 'form-control' }

@@ -23,6 +23,7 @@
 #  notes                  :text
 #  password_reset_token   :string
 #  password_reset_sent_at :datetime
+#  employed               :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -59,39 +60,68 @@ class User < ActiveRecord::Base
   end
 
   def build_comment
-    "#{ENV['TRELLO_USER']}\nemail: #{email}\nclassification: #{pretty_classification}\nphone: #{phone}\naddress: #{street}, #{city}, #{state}, #{zipcode}\npayment method: #{payment_method}\npayment address: #{payment_address}\ncalendly link: #{calendly_link}\nnotes: #{notes}\ninterests: #{categories.pluck(:pretty_name).join(', ')} "
+%(
+#{ENV['TRELLO_USER']}
+email: #{email}
+classification: #{pretty_classification}
+phone: #{phone}
+address: #{street}, #{city}, #{state}, #{zipcode}
+employed full time: #{employed ? "Yes" : "No"}
+payment method: #{payment_method}
+payment address: #{payment_address}
+calendly link: #{calendly_link}
+notes: #{notes}
+interests: #{categories.pluck(:pretty_name).join(', ')}
+)
   end
 
   def build_description
-    %(
-      \n\<Choose correct labels above\>
-      \nContact Information:
-      \n-#{ email }
-      -#{ phone != "" ? phone : "\<Cell\>" }
-      -#{ calendly_link != "" ? calendly_link : "\<Calendly Link\>" }
-      General:
-      \n-Unique Skillsets: \<Insert/example: Great "fixer\>
-      -Interest/Preference: #{categories.length > 0 ? categories.pluck(:pretty_name).join(', ') : "\<Insert\>"}
-      -Notes from Freelancer directly: #{ notes != "" || "\<Insert\>" }
-      -Currently Assigned Books: \<Link Project Boards\>
-      -If no longer working with us: \<Insert reason/archive card - need "firing process?"\>
-      Additional Contact Information:
-      \n-#{ street != "" && city != "" && state != "" && zipcode != "" ? "#{street}, #{city}, #{state}, #{zipcode}" : "\<Address, City, State, Zip, Time Zone\)" }
-      -\<Misc: Gender, DOB/Year, Optional\>
-      -\<Social Media Links, Optional\>
-      Pay Information:
-      \n-\<Pay Rate/Hour\>
-      -\<W-9 received, Yes/No\>
-      -\<Payment email if different\>
-      Bio:
-      \n-\<Insert copy or link or attachment\>
-      Referral:
-      \n-\<Source of referral including name if applicable\>
-      Gift Log:
-      \n-\<Insert details if any\>
-      Previous BIAB books:
-      \n-\<Link to closed boards\>
-      )
+%(
+_Choose correct labels above_
+**Contact Information**:
+
+ - Email: #{ email }
+ - Cell: #{ phone }
+ - Calendly Link: #{ calendly_link }
+
+**General**:
+
+ - Unique Skillsets: \(Example: Great "fixer\)
+ - Interest/Preference: #{ categories.length > 0 ? categories.pluck(:pretty_name).join(', ') : "" }
+ - Notes from Freelancer directly: #{ notes }
+ - Currently Assigned Books: \(Link Project Boards\)
+ - If no longer working with us: \(Insert reason/archive card\)
+ - Full -time Job: #{ employed ? "Yes" : "No" }
+
+**Additional Contact Information**:
+
+ - #{ street != "" && city != "" && state != "" && zipcode != "" ? "#{street}, #{city}, #{state}, #{zipcode}" : "Address, City, State, Zip, Time Zone" }
+ - Misc: Gender, DOB/Year \(Optional\)
+ - Social Media Links \(Optional\)
+
+**Pay Information**:
+
+- Pay Method:
+- Pay Rate/Hour:
+- W-9 received: Yes/No
+- Payment email if different
+
+**Bio**:
+
+ - Insert copy or link or attachment
+
+**Referral**:
+
+  - Source of referral including name if applicable
+
+**Gift Log**:
+
+  - Insert details if any
+
+**Previous BIAB books**:
+
+ - Link to closed boards
+)
   end
 
   def generate_token(column)

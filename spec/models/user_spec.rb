@@ -23,6 +23,7 @@
 #  notes                  :text
 #  password_reset_token   :string
 #  password_reset_sent_at :datetime
+#  employed               :boolean          default(FALSE)
 #
 # Indexes
 #
