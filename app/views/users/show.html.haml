@@ -22,48 +22,67 @@
           = f.submit "Save", class: "btn btn-primary"
     .suggestion-box
       %h3 Resources
-      %ul
+      %ul#resource-dropdowns
         %li
-          %a{ href: "https://docs.google.com/document/d/1mK042vYCVqXZ8-oh9dX4TsSCEg9RP1rEdlrIvb8eB8Y", target: "_blank" }
-            Editor Guide:
-          The comprehensive guide to doing your job as a BIAB editor.
+          .btn-group
+            %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+              General Resources
+              %span.caret
+            %ul.dropdown-menu
+              %li
+                %a{ href: "https://docs.google.com/document/d/1CmV67OIbcZ93a2jF-rnMK0Jyxfcp9XbqXi0DwimILuc/edit?usp=sharing", target: "_blank" } FAQ: A (constantly growing) list of the most common issues that editors run into.
+              %li
+                %a{ href: "http://bookinabox.com/tutorials/", target: "_blank" } Tutorials: Step-by-step tutorials to the most common parts of your job.
+              %li
+                %a{ href: "https://bookinabox.wufoo.com/forms/zaam09q12tjaw5/", target: "_blank" } Suggestion Box: What can we do to make your job better? Let us know here
         %li
-          %a{ href: "https://www.dropbox.com/request/sYoMH4RMI8zrjYI3YCjs", target: "_blank" }
-            Interview Submissions:
-          Here's the Dropbox link to submit your interview MP3s for transcription.
+          .btn-group
+            %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+              Editor Resources
+              %span.caret
+            %ul.dropdown-menu
+              %li
+                %a{ href: "https://bookinabox.wufoo.com/forms/q11gkmui1d3omt6/", target: "_blank" } Upload Author Interviews: Here's the form to submit your interview recordings for immediate transcription.
+              %li
+                %a{ href: "https://bookinabox.wufoo.com/forms/m4ysaqf0q87tkb/", target: "_blank" } Final MS Submission: When the final manuscript is revised and locked, this is where it goes.
+              %li.dropdown-header Training
+              %br
+              %li
+                %a{ href: "https://drive.google.com/folderview?id=0BwefpHtGRr74Wmx0ZzNvWHZnYUE&usp=sharing", target: "_blank" } Editor Guide: Training Modules
+              %br
+              %li
+                %a{ href: "https://docs.google.com/document/d/1ayl-5tzSElLMDLMGQyKrT_R9tj4sEvspIlZrGZsATX4/edit?usp=sharing", target: "_blank" } Common Mistakes in Translation
+              %br
+              %li
+                %a{ href: "https://drive.google.com/file/d/0B2RJeSFTOXy4eGNQbFh6ZHQ1Yzg/view?usp=sharing", target: "_blank" } Transcript to Manuscript Process Doc
+              %br
+              %li
+                %a{ href: "https://docs.google.com/document/d/1rVI2awwtUdmQMfOt368v6C19akPhnD0WD_nXHTPb6xw/edit?usp=sharing", target: "_blank" } Author/Editor Introduction Email Template
+              %br
+              %li
+                %a{ href: "https://www.dropbox.com/sh/55dnzsz7ahkqxxh/AAAvXcYLF4ZmIeZ2oEc8WJJFa?dl=0", target: "_blank" } Editor Training Calls: Recorded versions of all of our monthly Editor calls.
         %li
-          %a{ href: "https://bookinabox.wufoo.com/forms/m4ysaqf0q87tkb/", target: "_blank" }
-            Final Manuscript Submission:
-          When the final manuscript is locked and edited, this is where it goes.
+          .btn-group
+            %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+              Book Developer Resources
+              %span.caret
+            %ul.dropdown-menu
+              %li.dropdown-header Training
+              %br
+              %li
+                %a{ href: "https://drive.google.com/folderview?id=0B6-7L-z6_qPSYVBCMjJzWXV6d0E&usp=sharing", target: "_blank" } Training Modules
+              %br
+              %li
+                %a{ href: "https://drive.google.com/a/bookinabox.com/file/d/0B6-7L-z6_qPSQzZldG96R3JKTzg/view", target: "_blank" } Book Developer Common Mistakes
+              %li
+                %a{ href: "https://www.dropbox.com/sh/nz3r80onczbxftx/AAArw278CiFvjnj-ODCW-q6Ma?dl=0", target: "_blank" } Book Developer Training Calls: Recorded versions of all of our monthly Book Developer calls.
         %li
-          %a{ href: "https://bookinabox.wufoo.com/forms/zaam09q12tjaw5/", target: "_blank" }
-            Suggestion Box:
-          What could we do to make your job better? Let us know here.
-        %li
-          %a{ href: "https://www.dropbox.com/sh/g95frds0sw0rl5g/AAAJpUY0KBguQNQZYvdzhhi_a?dl=0", target: "_blank" }
-            Editor Conference Calls:
-          Recorded versions of all of our monthly editor calls.
-        %li
-          %a{ href: "https://docs.google.com/document/d/1CmV67OIbcZ93a2jF-rnMK0Jyxfcp9XbqXi0DwimILuc/edit?usp=sharing", target: "_blank" }
-            Editor FAQ:
-          A (constantly growing) list of the most comment issues that editors run into.
-        %li
-          %a{ href: "http://bookinabox.com/tutorials", target: "_blank" }
-            Freelancer Tutorials:
-          Step-by-step tutorials to the most common parts of your job [under construction].
-        %li
-          %a{ href: "https://bookinabox.wufoo.com/forms/q11gkmui1d3omt6/", target: "_blank" }
-            New Interview Submissions:
-          Here's the form to submit your interview recordings for immediate transcription. (Effective as of 3/10/2016)
-        %li
-          %a{ href: "https://docs.google.com/document/d/1ayl-5tzSElLMDLMGQyKrT_R9tj4sEvspIlZrGZsATX4/edit?usp=sharing", target: "_blank" }
-            Editor Common Mistakes:
-          A run through of the most common mistakes we see in the translation/editing process.
-        %li
-          %a{ href: "https://drive.google.com/open?id=0B6-7L-z6_qPSQzZldG96R3JKTzg", target: "_blank" }
-            Book Developer Common Mistakes:
-          A run through of the most common mistakes we see in the outlining process.
-        %li
-          %a{ href: "https://docs.google.com/a/bookinabox.com/document/d/1Q0k4t2tUiFa7HMv2BMYjg1KnDmfCotOpMq3nLN0oHww/edit?usp=sharing", target: "_blank" }
-            Editor Style Guide:
-          Our format and style guidelines for all manuscripts.
+          .btn-group
+            %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+              Proofreader Resources
+              %span.caret
+            %ul.dropdown-menu
+              %li
+                %a{ href: "https://docs.google.com/document/d/1ExdJv9UXumO9ezHhWW40NQmv_UdUOowmbUgOtmNV3RU/edit?usp=sharing", target: "_blank" } Proofreader Guide
+              %li
+                %a{ href: "https://docs.google.com/document/d/1Q0k4t2tUiFa7HMv2BMYjg1KnDmfCotOpMq3nLN0oHww/edit?usp=sharing", target: "_blank" } Style Guide
