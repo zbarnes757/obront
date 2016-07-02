@@ -20,6 +20,8 @@
           = f.text_area :notes, class: "form-control"
 
           = f.submit "Save", class: "btn btn-primary"
+.row
+  .col-md-12
     .suggestion-box
       %h3 Resources
       %ul#resource-dropdowns
@@ -64,6 +66,9 @@
               %br
               %li
                 %a{ href: "https://www.dropbox.com/sh/55dnzsz7ahkqxxh/AAAvXcYLF4ZmIeZ2oEc8WJJFa?dl=0", target: "_blank" } Editor Training Calls: Recorded versions of all of our monthly Editor calls.
+              %br
+              %li
+                %a{ href: "https://drive.google.com/open?id=0B_rZtiVBE5s6blhTU3RfcExrNVE", target: "_blank" } Stuff You Need to Know
         %li
           .btn-group
             %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
@@ -89,3 +94,17 @@
                 %a{ href: "https://docs.google.com/document/d/1ExdJv9UXumO9ezHhWW40NQmv_UdUOowmbUgOtmNV3RU/edit?usp=sharing", target: "_blank" } Proofreader Guide
               %li
                 %a{ href: "https://docs.google.com/document/d/1Q0k4t2tUiFa7HMv2BMYjg1KnDmfCotOpMq3nLN0oHww/edit?usp=sharing", target: "_blank" } Style Guide
+        %li
+          .btn-group
+            %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+              BIAB Resources for Authors
+              %span.caret
+            %ul.dropdown-menu
+              %li
+                %a{ href: "http://bookinabox.com/how-to-title-a-book", target: "_blank" } How to Title a Book
+              %li
+                %a{ href: "http://bookinabox.com/how-to-take-an-author-photo", target: "_blank" } How to Take an Author Photo
+              %li
+                %a{ href: "http://bookinabox.com/book-blurbs/", target: "_blank" } How to Get Incredible Book Blurbs for Your Book
+              %li
+                %a{ href: "http://bookinabox.com/how-to-get-attention/", target: "_blank" } How to Get Attention
