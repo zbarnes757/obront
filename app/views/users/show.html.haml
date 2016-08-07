@@ -12,12 +12,23 @@
           %p Currently Busy
         = link_to "Change Status", change_status_path, class: "btn btn-#{looking_for_work_class(@user)}"
 .row
-  .col-md-8.col-md-offset-2
+  .col-md-10.col-md-offset-1
     .notes-section
       = form_for @user do |f|
         .form-group
           = f.label :notes, "Notes"
           = f.text_area :notes, class: "form-control"
+
+          .capacity-block.form-group
+            %p Please consider your expected availability for taking on new work without major interruptions:
+
+            .space-block
+              %p How many total NEW projects would you like THIS calendar month? (No need to update during the month, we’ll track your assignments.)
+              = f.text_field :current_capacity, class: "form-control"
+
+            .space-block
+              %p How many total NEW projects do you think you will want NEXT calendar month?
+              = f.text_field :next_capacity, class: "form-control"
 
           = f.submit "Save", class: "btn btn-primary"
 .row

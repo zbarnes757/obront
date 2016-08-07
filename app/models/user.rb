@@ -24,6 +24,8 @@
 #  password_reset_token   :string
 #  password_reset_sent_at :datetime
 #  employed               :boolean          default(FALSE)
+#  current_capacity       :integer          default(0)
+#  next_capacity          :integer          default(0)
 #
 # Indexes
 #
@@ -91,11 +93,11 @@ _Choose correct labels above_
  - Notes from Freelancer directly: #{ notes }
  - Currently Assigned Books: \(Link Project Boards\)
  - If no longer working with us: \(Insert reason/archive card\)
- - Full -time Job: #{ employed ? "Yes" : "No" }
+ - Full-time Job: #{ employed ? "Yes" : "No" }
 
 **Additional Contact Information**:
 
- - #{ street != "" && city != "" && state != "" && zipcode != "" ? "#{street}, #{city}, #{state}, #{zipcode}" : "Address, City, State, Zip, Time Zone" }
+ - #{ street != "" && city != "" && state != "" && zipcode != "" ? "#{ street }, #{ city }, #{ state }, #{ zipcode }" : "Address, City, State, Zip, Time Zone" }
  - Misc: Gender, DOB/Year \(Optional\)
  - Social Media Links \(Optional\)
 
@@ -120,7 +122,12 @@ _Choose correct labels above_
 
 **Previous BIAB books**:
 
- - Link to closed boards
+  - Link to closed boards
+
+**Work Capacity**:
+
+  - This Month: #{ current_capacity }
+  - Next Month: #{ next_capacity }
 )
   end
 
@@ -174,7 +181,6 @@ _Choose correct labels above_
     }
   end
 
-
   def interest_labels
     {
       "business" => "56ca0559152c3f92fd1ce619",
@@ -198,6 +204,4 @@ _Choose correct labels above_
     save!
     UserMailer.password_reset(self).deliver
   end
-
-
 end

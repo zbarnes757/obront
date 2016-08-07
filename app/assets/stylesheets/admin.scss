@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .editor-table {
-  margin-bottom: 150px; 
+  margin-bottom: 150px;
 }
 
 .no-results {
@@ -18,4 +18,19 @@
 
 .submit-button {
   margin: 25px 45%;
+}
+
+.admin-resources-box {
+  margin: 30px 0px;
+  padding: 10px 0px 30px;
+  text-align: left;
+
+  h3 {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  li {
+    margin: 5px;
+  }
 }
