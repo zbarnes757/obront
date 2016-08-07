@@ -67,8 +67,8 @@ class UsersController < ApplicationController
     freelancer_board.cards.each do |card|
       if card.name == user.full_name
         card.add_comment(user.build_comment)
-        card.update_fields({ desc: user.build_description })
-        card.save
+        card.desc = user.build_description
+        card.update!
         break
       end
     end
