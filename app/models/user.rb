@@ -33,6 +33,7 @@
 #  index_users_on_email             (email)
 #  index_users_on_looking_for_work  (looking_for_work)
 #
+require "date"
 
 class User < ActiveRecord::Base
   has_secure_password
@@ -74,6 +75,17 @@ payment address: #{payment_address}
 calendly link: #{calendly_link}
 notes: #{notes}
 interests: #{categories.pluck(:pretty_name).join(', ')}
+capacity this month: #{ current_capacity }
+capacity next month: #{ next_capacity }
+)
+  end
+
+  def monthly_comment
+%(
+#{ENV['TRELLO_USER']}
+Work capacity for #{pretty_month(Date.today.month)}
+this month: #{ current_capacity }
+next month: #{ next_capacity }
 )
   end
 
@@ -203,5 +215,34 @@ _Choose correct labels above_
     self.password_reset_sent_at = Time.zone.now
     save!
     UserMailer.password_reset(self).deliver
+  end
+
+  def pretty_month(i)
+    case i
+    when 1
+      "January"
+    when 2
+      "February"
+    when 3
+      "March"
+    when 4
+      "April"
+    when 5
+      "May"
+    when 6
+      "June"
+    when 7
+      "July"
+    when 8
+      "August"
+    when 9
+      "September"
+    when 10
+      "October"
+    when 11
+      "November"
+    when 12
+      "December"
+    end
   end
 end

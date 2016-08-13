@@ -4,7 +4,7 @@ class UpdateUserCapacityJob < ActiveJob::Base
   def perform(user)
     user.current_capacity = user.next_capacity
     user.save
-    update_user_description(user)
+    add_monthly_comment(user)
   end
 
   private
@@ -13,10 +13,10 @@ class UpdateUserCapacityJob < ActiveJob::Base
     Trello::Board.find(ENV['FREELANCER_BOARD'])
   end
 
-  def update_user_description(user)
+  def add_monthly_comment(user)
     freelancer_board.cards.each do |card|
       if card.name == user.full_name
-        card.update!({ desc: user.build_description })
+        card.add_comment(user.monthly_comment)
         break
       end
     end
