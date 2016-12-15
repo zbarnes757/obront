@@ -72,6 +72,23 @@ class UsersController < ApplicationController
     end
   end
 
+  def all_interest_ids
+    [
+      "56ca0559152c3f92fd1ce619",
+      "56ca0561152c3f92fd1ce61b",
+      "56ca056f152c3f92fd1ce64e",
+      "56ca0575152c3f92fd1ce667",
+      "56ca0580152c3f92fd1ce687",
+      "56ca0587152c3f92fd1ce6a0",
+      "56ca0590152c3f92fd1ce6a8",
+      "56ca0598152c3f92fd1ce6b5",
+      "56ca059c152c3f92fd1ce6c3",
+      "56ca05a5152c3f92fd1ce6e3",
+      "56ca05aa152c3f92fd1ce6f8",
+      "56ca05af152c3f92fd1ce6f9"
+    ]
+  end
+
   def change_trello_label(user)
     freelancer_board.cards.each do |card|
       if card.name == user.full_name
@@ -93,20 +110,6 @@ class UsersController < ApplicationController
   end
 
   def swap_interest_labels(card, user)
-    all_interest_ids = [
-      "56ca0559152c3f92fd1ce619",
-      "56ca0561152c3f92fd1ce61b",
-      "56ca056f152c3f92fd1ce64e",
-      "56ca0575152c3f92fd1ce667",
-      "56ca0580152c3f92fd1ce687",
-      "56ca0587152c3f92fd1ce6a0",
-      "56ca0590152c3f92fd1ce6a8",
-      "56ca0598152c3f92fd1ce6b5",
-      "56ca059c152c3f92fd1ce6c3",
-      "56ca05a5152c3f92fd1ce6e3",
-      "56ca05aa152c3f92fd1ce6f8",
-      "56ca05af152c3f92fd1ce6f9"
-    ]
     existing_labels = card.labels.map { |label| label.id }
     user_interest_ids = user.get_interest_label
     card.labels.each do |label|
@@ -169,7 +172,9 @@ class UsersController < ApplicationController
                                  :payment_address,
                                  :payment_method,
                                  :calendly_link,
-                                 :notes)
+                                 :notes,
+                                 :employed,
+                                 :current_capacity,
+                                 :next_capacity)
   end
-
 end

@@ -43,15 +43,15 @@
 # Category.find_or_create_by(pretty_name: "Miscellaneous", name: "miscellaneous")
 # puts "Categories have been seeded."
 
-User.editors.each do |user|
-  if user.not_yet_assigned? || user.first_assignment? || user.b_list? || user.a_list? || user.all_star?
-    user.classification = 0
-  elsif user.a_list_outliner? || user.trial_period? || user.all_star_outliner?
-    user.classification = 1
-  elsif user.proof_reader?
-    user.classification = 2
-  elsif user.cover_designer?
-    user.classification = 3
-  end
-  user.save
-end
+# User.editors.each do |user|
+#   if user.not_yet_assigned? || user.first_assignment? || user.b_list? || user.a_list? || user.all_star?
+#     user.classification = 0
+#   elsif user.a_list_outliner? || user.trial_period? || user.all_star_outliner?
+#     user.classification = 1
+#   elsif user.proof_reader?
+#     user.classification = 2
+#   elsif user.cover_designer?
+#     user.classification = 3
+#   end
+#   user.save
+# end

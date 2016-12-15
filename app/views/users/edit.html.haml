@@ -26,6 +26,10 @@
           = f.label :calendly_link, "Calendly Link"
           = f.text_field :calendly_link, class: 'form-control'
         .form-group
+          = f.label :employed, "Are you currently employed full-time?"
+          %br
+          = f.select :employed, [['Yes', true], ['No', false ]], {}, class: 'form-control'
+        .form-group
           = f.label :looking_for_work, "Looking for work?"
           %br
           = f.select :looking_for_work, [['Available for Work', true], ['Currently Busy', false ]], {}, class: 'form-control'

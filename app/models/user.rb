@@ -23,6 +23,9 @@
 #  notes                  :text
 #  password_reset_token   :string
 #  password_reset_sent_at :datetime
+#  employed               :boolean          default(FALSE)
+#  current_capacity       :integer          default(0)
+#  next_capacity          :integer          default(0)
 #
 # Indexes
 #
@@ -30,6 +33,7 @@
 #  index_users_on_email             (email)
 #  index_users_on_looking_for_work  (looking_for_work)
 #
+require "date"
 
 class User < ActiveRecord::Base
   has_secure_password
@@ -45,7 +49,7 @@ class User < ActiveRecord::Base
 
   enum classification: [ :editor,
                          :book_developer,
-                         :proofreader,
+                         :proof_reader,
                          :cover_designer,
                          :copywriter,
                          :interior_layout_designer,
@@ -59,39 +63,84 @@ class User < ActiveRecord::Base
   end
 
   def build_comment
-    "#{ENV['TRELLO_USER']}\nemail: #{email}\nclassification: #{pretty_classification}\nphone: #{phone}\naddress: #{street}, #{city}, #{state}, #{zipcode}\npayment method: #{payment_method}\npayment address: #{payment_address}\ncalendly link: #{calendly_link}\nnotes: #{notes}\ninterests: #{categories.pluck(:pretty_name).join(', ')} "
+%(
+#{ENV['TRELLO_USER']}
+email: #{email}
+classification: #{pretty_classification}
+phone: #{phone}
+address: #{street}, #{city}, #{state}, #{zipcode}
+employed full time: #{employed ? "Yes" : "No"}
+payment method: #{payment_method}
+payment address: #{payment_address}
+calendly link: #{calendly_link}
+notes: #{notes}
+interests: #{categories.pluck(:pretty_name).join(', ')}
+capacity this month: #{ current_capacity }
+capacity next month: #{ next_capacity }
+)
+  end
+
+  def monthly_comment
+%(
+#{ENV['TRELLO_USER']}
+Work capacity for #{pretty_month(Date.today.month)}
+this month: #{ current_capacity }
+next month: #{ next_capacity }
+)
   end
 
   def build_description
-    %(
-      \n\<Choose correct labels above\>
-      \nContact Information:
-      \n-#{ email }
-      -#{ phone != "" ? phone : "\<Cell\>" }
-      -#{ calendly_link != "" ? calendly_link : "\<Calendly Link\>" }
-      General:
-      \n-Unique Skillsets: \<Insert/example: Great "fixer\>
-      -Interest/Preference: #{categories.length > 0 ? categories.pluck(:pretty_name).join(', ') : "\<Insert\>"}
-      -Notes from Freelancer directly: #{ notes != "" || "\<Insert\>" }
-      -Currently Assigned Books: \<Link Project Boards\>
-      -If no longer working with us: \<Insert reason/archive card - need "firing process?"\>
-      Additional Contact Information:
-      \n-#{ street != "" && city != "" && state != "" && zipcode != "" ? "#{street}, #{city}, #{state}, #{zipcode}" : "\<Address, City, State, Zip, Time Zone\)" }
-      -\<Misc: Gender, DOB/Year, Optional\>
-      -\<Social Media Links, Optional\>
-      Pay Information:
-      \n-\<Pay Rate/Hour\>
-      -\<W-9 received, Yes/No\>
-      -\<Payment email if different\>
-      Bio:
-      \n-\<Insert copy or link or attachment\>
-      Referral:
-      \n-\<Source of referral including name if applicable\>
-      Gift Log:
-      \n-\<Insert details if any\>
-      Previous BIAB books:
-      \n-\<Link to closed boards\>
-      )
+%(
+_Choose correct labels above_
+**Contact Information**:
+
+ - Email: #{ email }
+ - Cell: #{ phone }
+ - Calendly Link: #{ calendly_link }
+
+**General**:
+
+ - Unique Skillsets: \(Example: Great "fixer\)
+ - Interest/Preference: #{ categories.length > 0 ? categories.pluck(:pretty_name).join(', ') : "" }
+ - Notes from Freelancer directly: #{ notes }
+ - Currently Assigned Books: \(Link Project Boards\)
+ - If no longer working with us: \(Insert reason/archive card\)
+ - Full-time Job: #{ employed ? "Yes" : "No" }
+
+**Additional Contact Information**:
+
+ - #{ street != "" && city != "" && state != "" && zipcode != "" ? "#{ street }, #{ city }, #{ state }, #{ zipcode }" : "Address, City, State, Zip, Time Zone" }
+ - Misc: Gender, DOB/Year \(Optional\)
+ - Social Media Links \(Optional\)
+
+**Pay Information**:
+
+- Pay Method:
+- Pay Rate/Hour:
+- W-9 received: Yes/No
+- Payment email if different
+
+**Bio**:
+
+ - Insert copy or link or attachment
+
+**Referral**:
+
+  - Source of referral including name if applicable
+
+**Gift Log**:
+
+  - Insert details if any
+
+**Previous BIAB books**:
+
+  - Link to closed boards
+
+**Work Capacity**:
+
+  - This Month: #{ current_capacity }
+  - Next Month: #{ next_capacity }
+)
   end
 
   def generate_token(column)
@@ -144,7 +193,6 @@ class User < ActiveRecord::Base
     }
   end
 
-
   def interest_labels
     {
       "business" => "56ca0559152c3f92fd1ce619",
@@ -169,5 +217,32 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver
   end
 
-
+  def pretty_month(i)
+    case i
+    when 1
+      "January"
+    when 2
+      "February"
+    when 3
+      "March"
+    when 4
+      "April"
+    when 5
+      "May"
+    when 6
+      "June"
+    when 7
+      "July"
+    when 8
+      "August"
+    when 9
+      "September"
+    when 10
+      "October"
+    when 11
+      "November"
+    when 12
+      "December"
+    end
+  end
 end

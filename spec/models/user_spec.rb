@@ -23,6 +23,9 @@
 #  notes                  :text
 #  password_reset_token   :string
 #  password_reset_sent_at :datetime
+#  employed               :boolean          default(FALSE)
+#  current_capacity       :integer          default(0)
+#  next_capacity          :integer          default(0)
 #
 # Indexes
 #
