@@ -16,7 +16,8 @@ module ApplicationHelper
       ["Cover Designer", :cover_designer],
       ["Copywriter", :copywriter],
       ["Interior Layout Designer", :interior_layout_designer],
-      ["Book Marketer", :book_marketer]
+      ["Book Marketer", :book_marketer],
+      ["Indexer", :indexer]
     ]
   end
 
