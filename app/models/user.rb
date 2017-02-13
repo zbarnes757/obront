@@ -54,7 +54,8 @@ class User < ActiveRecord::Base
                          :copywriter,
                          :interior_layout_designer,
                          :book_marketer,
-                         :indexer ]
+                         :indexer,
+                         :copyeditor ]
 
 
   scope :editors, -> { where(admin: false) }
@@ -181,6 +182,8 @@ _Choose correct labels above_
       "Book Marketer"
     when "indexer"
       "Indexer"
+    when "copyeditor"
+      "Copyeditor"
     end
   end
 
