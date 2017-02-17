@@ -135,7 +135,7 @@ class UsersController < ApplicationController
     Trello::Card.create({
       name: @user.full_name,
       list_id: ENV['NOT_YET_ASSIGNED_LIST'],
-      card_labels: [ looking_for_work_label, category_label, interest_label ].join(","),
+      card_labels: [ looking_for_work_label, category_label, interest_label ].compact.join(","),
       desc: @user.build_description
       })
   end
