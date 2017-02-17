@@ -195,7 +195,9 @@ _Choose correct labels above_
       "cover_designer" => "56c21af1152c3f92fd06884f",
       "copywriter" => "56ddb3da152c3f92fd51207f",
       "interior_layout_designer" => "56c21ae5152c3f92fd06880d",
-      "book_marketer" => "56ddb3f7152c3f92fd5120cd"
+      "book_marketer" => "56ddb3f7152c3f92fd5120cd",
+      "copyeditor" => "57c738cd84e677fd362ca289",
+      "indexer" => "589e124bced82109ff384225"
     }
   end
 
